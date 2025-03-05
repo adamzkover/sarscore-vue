@@ -2,15 +2,24 @@
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Patient from '@/models/Patient';
+import { getPatient } from '@/utils/indexedDB';
 
 const route = useRoute();
 const patient = ref(null);
 
 onMounted(() => {
   const patientId = route.params.id;
-  // Fetch patient details from an API or a data source
-  // For now, we'll use a mock patient
-  patient.value = new Patient(patientId, 'John Doe');
+
+  getPatient(patientId).then((data) => {
+    if (data) {
+      patient.value = new Patient(data.id, data.name);
+    } else {
+      // Handle case where patient is not found
+      console.error('Patient not found');
+    }
+  }).catch((error) => {
+    console.error('Error fetching patient:', error);
+  });
 });
 </script>
 
