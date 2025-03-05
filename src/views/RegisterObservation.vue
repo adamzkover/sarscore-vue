@@ -17,6 +17,7 @@
         <label><input type="checkbox" v-model="signsOfInfection" value="pain" /> Pain</label>
         <label><input type="checkbox" v-model="signsOfInfection" value="warmth" /> Warmth</label>
       </div>
+      <button type="button" @click="cancel">Cancel</button>
       <button type="submit">Submit</button>
     </form>
   </div>
@@ -35,6 +36,9 @@ export default {
       // Handle form submission
       console.log('Color:', this.color);
       console.log('Signs of Infection:', this.signsOfInfection);
+    },
+    cancel() {
+      this.$router.push({ name: 'WoundView', params: { patientId: this.$route.params.patientId, woundId: this.$route.params.woundId } });
     }
   }
 };
