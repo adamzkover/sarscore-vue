@@ -1,4 +1,3 @@
-
 const DB_NAME = 'SaarScoreDB';
 const DB_VERSION = 1;
 const STORE_NAME = 'patients';
@@ -60,4 +59,22 @@ function addPatient(patient) {
     });
 }
 
-export { getPatient, addPatient };
+function savePatient(patient) {
+    return openDB().then((db) => {
+        return new Promise((resolve, reject) => {
+            const transaction = db.transaction([STORE_NAME], 'readwrite');
+            const store = transaction.objectStore(STORE_NAME);
+            const request = store.put(patient);
+
+            request.onsuccess = () => {
+                resolve();
+            };
+
+            request.onerror = (event) => {
+                reject(event.target.error);
+            };
+        });
+    });
+}
+
+export { getPatient, addPatient, savePatient };
