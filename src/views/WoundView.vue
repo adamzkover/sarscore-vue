@@ -4,15 +4,17 @@ import { useRoute } from 'vue-router';
 import { getPatient } from '@/utils/indexedDB';
 
 const route = useRoute();
+const patient = ref(null);
 const wound = ref(null);
 
 onMounted(() => {
   const patientId = route.params.patientId;
   const woundId = route.params.woundId;
 
-  getPatient(patientId).then((patient) => {
-    if (patient && patient.wounds) {
-      wound.value = patient.wounds[woundId];
+  getPatient(patientId).then((fetchedPatient) => {
+    patient.value = fetchedPatient;
+    if (patient.value && patient.value.wounds) {
+      wound.value = patient.value.wounds[woundId];
       if (!wound.value) {
         console.error('Wound not found');
       }
@@ -26,6 +28,16 @@ onMounted(() => {
 </script>
 
 <template>
+  <div v-if="patient">
+    <h1>Patient Details</h1>
+    <p><strong>Name:</strong> {{ patient.name }}</p>
+    <p><strong>ID:</strong> {{ patient.id }}</p>
+  </div>
+  <div>
+    <button @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">
+      Back to Patient View
+    </button>
+  </div>
   <div v-if="wound">
     <h1>Wound Details</h1>
     <p><strong>ID:</strong> {{ wound.id }}</p>
