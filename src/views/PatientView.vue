@@ -36,9 +36,11 @@ function registerWound() {
     <h2>Wounds</h2>
     <ul>
       <li v-for="wound in patient.wounds" :key="wound.id">
-        <strong>ID:</strong> {{ wound.id }}, <strong>Location:</strong> {{ wound.location }}, <strong>Type:</strong> {{ wound.type }}
-        <br />
-        <strong>Registered:</strong> {{ wound.registered }}
+        <router-link :to="{ name: 'WoundView', params: { patientId: patient.id, woundId: wound.id } }">
+          <strong>ID:</strong> {{ wound.id }}, <strong>Location:</strong> {{ wound.location }}, <strong>Type:</strong> {{ wound.type }}
+          <br />
+          <strong>Registered:</strong> {{ wound.registered }}
+        </router-link>
       </li>
     </ul>
   </div>
