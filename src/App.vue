@@ -22,9 +22,6 @@ import 'bootstrap'
               <RouterLink class="nav-link" to="/">Home</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/about">About</RouterLink>
-            </li>
-            <li class="nav-item">
               <RouterLink class="nav-link" to="/patient/1">Patient</RouterLink>
             </li>
           </ul>
