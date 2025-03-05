@@ -1,7 +1,8 @@
 class Patient {
-    constructor(id, name) {
+    constructor(id, name, wounds) {
         this.id = id;
         this.name = name;
+        this.wounds = wounds;
     }
 }
 
