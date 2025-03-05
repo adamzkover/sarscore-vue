@@ -23,7 +23,7 @@ async function initializePatient() {
     try {
         const patient = await getPatient(patientId);
         if (!patient) {
-            const newPatient = new Patient(patientId, patientName);
+            const newPatient = new Patient(patientId, patientName, {});
             await addPatient(newPatient);
             console.log('Patient created:', newPatient);
         } else {

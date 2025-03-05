@@ -17,9 +17,9 @@ function submitForm() {
 
   getPatient(route.params.id).then((patient) => {
     if (!patient.wounds) {
-      patient.wounds = [];
+      patient.wounds = {};
     }
-    patient.wounds.push(wound);
+    patient.wounds[id] = wound;
     savePatient(patient).then(() => {
       console.log('Wound registered:', wound);
       router.push({ name: 'PatientView', params: { id: route.params.id } });
