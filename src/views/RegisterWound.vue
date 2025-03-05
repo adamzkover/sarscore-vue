@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import Wound from '../models/Wound'; // Import the Wound model
+import { v4 as uuidv4 } from 'uuid'; // Import the UUID library
 
 const route = useRoute();
 const router = useRouter();
@@ -9,11 +11,8 @@ const type = ref('');
 const registered = ref('');
 
 function submitForm() {
-  const wound = {
-    location: location.value,
-    type: type.value,
-    registered: registered.value,
-  };
+  const id = uuidv4(); // Generate a random UUID
+  const wound = new Wound(id, location.value, type.value, registered.value); // Use the Wound model
   console.log('Wound registered:', wound);
   // Add logic to save the wound to the patient's record in IndexedDB
 }
