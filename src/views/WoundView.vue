@@ -48,6 +48,11 @@ onMounted(() => {
   <div v-else>
     <p>Loading...</p>
   </div>
+  <div>
+    <button @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">
+      Register New Observation
+    </button>
+  </div>
 </template>
 
 <style scoped>

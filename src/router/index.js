@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import PatientView from '@/views/PatientView.vue'
 import RegisterWound from '@/views/RegisterWound.vue'
 import WoundView from '@/views/WoundView.vue'
+import RegisterObservation from '@/views/RegisterObservation.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/patient/:patientId/wound/:woundId',
       name: 'WoundView',
       component: WoundView
+    },
+    {
+      path: '/patient/:patientId/wound/:woundId/registerObservation',
+      name: 'RegisterObservation',
+      component: RegisterObservation
     }
   ],
 })
