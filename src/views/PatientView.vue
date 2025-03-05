@@ -1,10 +1,11 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import Patient from '@/models/Patient';
 import { getPatient } from '@/utils/indexedDB';
 
 const route = useRoute();
+const router = useRouter();
 const patient = ref(null);
 
 onMounted(() => {
@@ -21,6 +22,10 @@ onMounted(() => {
     console.error('Error fetching patient:', error);
   });
 });
+
+function registerWound() {
+  router.push({ name: 'RegisterWound', params: { id: route.params.id } });
+}
 </script>
 
 <template>
@@ -32,6 +37,7 @@ onMounted(() => {
   <div v-else>
     <p>Loading...</p>
   </div>
+  <button @click="registerWound">Register wound</button>
 </template>
 
 <style scoped>
