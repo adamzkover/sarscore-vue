@@ -13,7 +13,7 @@ const router = createRouter({
     },
     {
       path: '/patient/:id',
-      name: 'Patient',
+      name: 'PatientView', // Updated name to match the cancel function
       component: PatientView
     },
     {
