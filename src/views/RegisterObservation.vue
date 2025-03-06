@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div class="alert alert-primary" role="alert">
+      Patient: {{ patient.name }} (ID: {{ patient.id }})
+    </div>
+    <div class="alert alert-light" role="alert">
+      Wound Details: {{ wound.type }} på {{ wound.location }} registrert {{ wound.registered }}
+    </div>
     <h1>Register Observation</h1>
     <form @submit.prevent="submitForm">
       <div>
@@ -24,14 +30,31 @@
 </template>
 
 <script>
+import { getPatient } from '@/utils/indexedDB';
+
 export default {
   data() {
     return {
+      patient: {},
+      wound: {},
       color: [],
       signsOfInfection: []
     };
   },
+  created() {
+    this.fetchPatientData();
+  },
   methods: {
+    async fetchPatientData() {
+      const patientId = this.$route.params.patientId;
+      try {
+        const patient = await getPatient(patientId);
+        this.patient = patient;
+        this.wound = patient.wounds[this.$route.params.woundId];
+      } catch (error) {
+        console.error('Error fetching patient data:', error);
+      }
+    },
     submitForm() {
       // Handle form submission
       console.log('Color:', this.color);
