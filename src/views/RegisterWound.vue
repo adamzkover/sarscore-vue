@@ -11,6 +11,8 @@ const location = ref('');
 const type = ref('');
 const registered = ref(new Date().toISOString().substr(0, 10)); // Pre-set to current date
 const maxDate = new Date().toISOString().substr(0, 10); // Get current date for max attribute
+const locationOptions = ['Leg', 'Head', 'Arm']; // Define location options
+const typeOptions = ['Cut', 'Burn', 'Pressure ulcer']; // Define type options
 
 function submitForm() {
   const id = uuidv4(); // Generate a random UUID
@@ -44,13 +46,19 @@ function cancel() {
       <div class="row mb-3">
         <label for="location" class="col-sm-2 col-form-label">Location:</label>
         <div class="col-sm-10">
-          <input id="location" class="form-control" v-model="location" type="text" required />
+          <select id="location" class="form-control" v-model="location" required>
+            <option disabled value="">Velg</option>
+            <option v-for="option in locationOptions" :key="option" :value="option">{{ option }}</option>
+          </select>
         </div>
       </div>
       <div class="row mb-3">
         <label for="type" class="col-sm-2 col-form-label">Type:</label>
         <div class="col-sm-10">
-          <input id="type" class="form-control" v-model="type" type="text" required />
+          <select id="type" class="form-control" v-model="type" required>
+            <option disabled value="">Velg</option>
+            <option v-for="option in typeOptions" :key="option" :value="option">{{ option }}</option>
+          </select>
         </div>
       </div>
       <div class="row mb-3">
