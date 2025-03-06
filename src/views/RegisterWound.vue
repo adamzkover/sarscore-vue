@@ -9,7 +9,8 @@ const route = useRoute();
 const router = useRouter();
 const location = ref('');
 const type = ref('');
-const registered = ref('');
+const registered = ref(new Date().toISOString().substr(0, 10)); // Pre-set to current date
+const maxDate = new Date().toISOString().substr(0, 10); // Get current date for max attribute
 
 function submitForm() {
   const id = uuidv4(); // Generate a random UUID
@@ -50,7 +51,7 @@ function cancel() {
       </div>
       <div>
         <label for="registered">Registered:</label>
-        <input id="registered" v-model="registered" type="text" required />
+        <input id="registered" v-model="registered" type="date" :max="maxDate" required />
       </div>
       <button type="submit">Submit</button>
       <button type="button" @click="cancel">Cancel</button>
