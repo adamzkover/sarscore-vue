@@ -14,6 +14,14 @@ const maxDate = new Date().toISOString().substr(0, 10); // Get current date for 
 const locationOptions = ['Leg', 'Head', 'Arm']; // Define location options
 const typeOptions = ['Cut', 'Burn', 'Pressure ulcer']; // Define type options
 
+const patient = ref(null);
+
+getPatient(route.params.id).then((data) => {
+  patient.value = data;
+}).catch((error) => {
+  console.error('Error fetching patient:', error);
+});
+
 function submitForm() {
   const id = uuidv4(); // Generate a random UUID
   const wound = new Wound(id, location.value, type.value, registered.value); // Use the Wound model
@@ -41,6 +49,7 @@ function cancel() {
 
 <template>
   <div>
+    <div class="alert alert-primary" role="alert" v-if="patient">{{ patient.name }} ({{ patient.id }})</div>
     <h1>Registrer nytt sår</h1>
     <form @submit.prevent="submitForm">
       <div class="row mb-3">
@@ -50,6 +59,12 @@ function cancel() {
             <option disabled value="">Velg</option>
             <option v-for="option in locationOptions" :key="option" :value="option">{{ option }}</option>
           </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-10">
+          <p>[Avatar som alternativ input for Location]</p>
         </div>
       </div>
       <div class="row mb-3">
