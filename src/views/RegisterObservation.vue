@@ -37,8 +37,8 @@
           <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
         </div>
       </div>
-      <button type="button" @click="cancel">Cancel</button>
-      <button type="submit">Submit</button>
+      <button type="button" class="btn btn-secondary" @click="cancel">Cancel</button>
+      <button type="submit" class="btn btn-primary ms-3">Submit</button>
     </form>
   </div>
 </template>

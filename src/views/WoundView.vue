@@ -29,27 +29,23 @@ onMounted(() => {
 
 <template>
   <div v-if="patient">
-    <h1>Patient Details</h1>
-    <p><strong>Name:</strong> {{ patient.name }}</p>
-    <p><strong>ID:</strong> {{ patient.id }}</p>
-  </div>
-  <div>
-    <button @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">
-      Back to Patient View
-    </button>
+    <div class="alert alert-primary" role="alert">
+      Patient: {{ patient.name }} (ID: {{ patient.id }})
+    </div>
   </div>
   <div v-if="wound">
-    <h1>Wound Details</h1>
-    <p><strong>ID:</strong> {{ wound.id }}</p>
-    <p><strong>Location:</strong> {{ wound.location }}</p>
-    <p><strong>Type:</strong> {{ wound.type }}</p>
-    <p><strong>Registered:</strong> {{ wound.registered }}</p>
+    <div class="alert alert-light" role="alert">
+      Wound Details: {{ wound.type }} på {{ wound.location }} registrert {{ wound.registered }}
+    </div>
   </div>
   <div v-else>
     <p>Loading...</p>
   </div>
   <div>
-    <button @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">
+    <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">
+      Back to Patient View
+    </button>
+    <button class="btn btn-primary ms-3" @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">
       Register New Observation
     </button>
   </div>

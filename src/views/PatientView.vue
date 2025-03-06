@@ -30,24 +30,31 @@ function registerWound() {
 
 <template>
   <div v-if="patient">
-    <h1>Patient Details</h1>
-    <p><strong>ID:</strong> {{ patient.id }}</p>
-    <p><strong>Name:</strong> {{ patient.name }}</p>
-    <h2>Wounds</h2>
-    <ul>
-      <li v-for="wound in patient.wounds" :key="wound.id">
-        <router-link :to="{ name: 'WoundView', params: { patientId: patient.id, woundId: wound.id } }">
-          <strong>ID:</strong> {{ wound.id }}, <strong>Location:</strong> {{ wound.location }}, <strong>Type:</strong> {{ wound.type }}
-          <br />
-          <strong>Registered:</strong> {{ wound.registered }}
-        </router-link>
-      </li>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h1>{{ patient.name }}</h1>
+        <p>{{ patient.id }}</p>
+      </div>
+    </div>
+    <h2>Registrerte sår</h2>
+    <ul class="list-group mb-3">
+      <router-link
+        v-for="wound in patient.wounds"
+        :key="wound.id"
+        :to="{ name: 'WoundView', params: { patientId: patient.id, woundId: wound.id } }"
+        tag="li"
+        class="list-group-item"
+      >
+        <strong>ID:</strong> {{ wound.id }}, <strong>Location:</strong> {{ wound.location }}, <strong>Type:</strong> {{ wound.type }}
+        <br />
+        <strong>Registered:</strong> {{ wound.registered }}
+      </router-link>
     </ul>
   </div>
   <div v-else>
     <p>Loading...</p>
   </div>
-  <button @click="registerWound">Register wound</button>
+  <button class="btn btn-primary" @click="registerWound">Registrer nytt sår</button>
 </template>
 
 <style scoped>
