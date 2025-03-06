@@ -11,6 +11,10 @@ import Patient from './models/Patient';
 // Add Bootstrap 5 CSS import
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Add Font Awesome CSS import
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+import '@fortawesome/fontawesome-free/css/solid.min.css';
+
 const app = createApp(App)
 
 app.use(createPinia())

@@ -43,11 +43,14 @@ function registerWound() {
         :key="wound.id"
         :to="{ name: 'WoundView', params: { patientId: patient.id, woundId: wound.id } }"
         tag="li"
-        class="list-group-item"
+        class="list-group-item d-flex justify-content-between align-items-center"
       >
-        <strong>ID:</strong> {{ wound.id }}, <strong>Location:</strong> {{ wound.location }}, <strong>Type:</strong> {{ wound.type }}
-        <br />
-        <strong>Registered:</strong> {{ wound.registered }}
+        <div>
+          <strong>ID:</strong> {{ wound.id }}, <strong>Location:</strong> {{ wound.location }}, <strong>Type:</strong> {{ wound.type }}
+          <br />
+          <strong>Registered:</strong> {{ wound.registered }}
+        </div>
+        <i class="fas fa-circle-play ms-3"></i>
       </router-link>
     </ul>
   </div>
@@ -59,4 +62,7 @@ function registerWound() {
 
 <style scoped>
 /* Add any styles for the PatientView here */
+i.fas.fa-circle-play {
+  font-size: 150%;
+}
 </style>
