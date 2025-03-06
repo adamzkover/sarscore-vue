@@ -39,22 +39,28 @@ function cancel() {
 
 <template>
   <div>
-    <h1>Register Wound</h1>
+    <h1>Registrer nytt sår</h1>
     <form @submit.prevent="submitForm">
-      <div>
-        <label for="location">Location:</label>
-        <input id="location" v-model="location" type="text" required />
+      <div class="row mb-3">
+        <label for="location" class="col-sm-2 col-form-label">Location:</label>
+        <div class="col-sm-10">
+          <input id="location" class="form-control" v-model="location" type="text" required />
+        </div>
       </div>
-      <div>
-        <label for="type">Type:</label>
-        <input id="type" v-model="type" type="text" required />
+      <div class="row mb-3">
+        <label for="type" class="col-sm-2 col-form-label">Type:</label>
+        <div class="col-sm-10">
+          <input id="type" class="form-control" v-model="type" type="text" required />
+        </div>
       </div>
-      <div>
-        <label for="registered">Registered:</label>
-        <input id="registered" v-model="registered" type="date" :max="maxDate" required />
+      <div class="row mb-3">
+        <label for="registered" class="col-sm-2 col-form-label">Registered:</label>
+        <div class="col-sm-10">
+          <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
+        </div>
       </div>
-      <button type="submit">Submit</button>
-      <button type="button" @click="cancel">Cancel</button>
+      <button type="button" class="btn btn-secondary" @click="cancel">Cancel</button>
+      <button type="submit" class="btn btn-primary ms-3">Submit</button>
     </form>
   </div>
 </template>
