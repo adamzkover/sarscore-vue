@@ -39,27 +39,31 @@ onMounted(() => {
     </div>
     <div v-if="wound.observations && wound.observations.length">
       <h2>Existing Observations</h2>
-      <ul>
-        <li v-for="observation in wound.observations" :key="observation.id">
+      <div class="card mb-3" v-for="observation in wound.observations" :key="observation.id">
+        <div class="card-body">
           <p>ID: {{ observation.id }}</p>
           <p>Color: {{ observation.color.join(', ') }}</p>
           <p>Signs of Infection: {{ observation.signsOfInfection.join(', ') }}</p>
           <p>Registered: {{ observation.registered }}</p>
           <p v-if="observation.photo">Photo: <img :src="observation.photo" alt="Observation Photo" style="max-width: 100px; max-height: 100px;" /></p>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
   <div v-else>
     <p>Loading...</p>
   </div>
-  <div>
-    <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">
+  <div class="row row-cols-auto mb-3">
+    <div class="col">
+      <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">
       Back to Patient View
     </button>
-    <button class="btn btn-primary ms-3" @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">
+    </div>
+    <div class="col">
+      <button class="btn btn-primary" @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">
       Register New Observation
     </button>
+    </div>
   </div>
 </template>
 
