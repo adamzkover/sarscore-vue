@@ -10,25 +10,44 @@
     <form @submit.prevent="submitForm">
       <div class="row mb-3">
         <div class="col-sm-2 col-form-label">
-          <p>Color</p>
+          <p>Farge:</p>
         </div>
         <div class="col-sm-10">
-          <label><input type="checkbox" v-model="color" value="pink" /> Pink</label>
-          <label><input type="checkbox" v-model="color" value="red" /> Red</label>
-          <label><input type="checkbox" v-model="color" value="black" /> Black</label>
-          <label><input type="checkbox" v-model="color" value="yellow" /> Yellow</label>
-          <label><input type="checkbox" v-model="color" value="gray" /> Gray</label>
-          <label><input type="checkbox" v-model="color" value="white" /> White</label>
+          <div class="form-check">
+            <input class="form-check-input" v-model="color" type="checkbox" value="pink" id="colorPink" />
+            <label class="form-check-label" for="colorPink"><span class="badge" style="background-color: #f2d3e1; color: #000">Rosa</span></label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="color" type="checkbox" value="red" id="colorRed" />
+            <label class="form-check-label" for="colorRed"><span class="badge text-bg-danger">Rødt</span></label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="color" type="checkbox" value="black" id="colorBlack" />
+            <label class="form-check-label" for="colorBlack"><span class="badge text-bg-dark">Svart</span></label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="color" type="checkbox" value="yellow" id="colorYellow" />
+            <label class="form-check-label" for="colorYellow"><span class="badge text-bg-warning">Gult</span></label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="color" type="checkbox" value="gray" id="colorGray" />
+            <label class="form-check-label" for="colorGray"><span class="badge text-bg-secondary">Grått</span></label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="color" type="checkbox" value="white" id="colorWhite" />
+            <label class="form-check-label" for="colorWhite"><span class="badge text-bg-light">Hvitt</span></label>
+          </div>
         </div>
       </div>
       <div class="row mb-3">
         <div class="col-sm-2 col-form-label">
-          <p>Infeksjonstegn</p>
+          <p>Infeksjonstegn:</p>
         </div>
         <div class="col-sm-10">
-          <label><input type="checkbox" v-model="signsOfInfection" value="smell" /> Smell</label>
-          <label><input type="checkbox" v-model="signsOfInfection" value="pain" /> Pain</label>
-          <label><input type="checkbox" v-model="signsOfInfection" value="warmth" /> Warmth</label>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="smell" id="infSmell" />
+            <label class="form-check-label" for="infSmell">Lukt</label>
+          </div>
         </div>
       </div>
       <div class="row mb-3">
@@ -44,7 +63,8 @@
 </template>
 
 <script>
-import { getPatient } from '@/utils/indexedDB';
+import { getPatient, savePatient } from '@/utils/indexedDB';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   data() {
@@ -71,11 +91,29 @@ export default {
         console.error('Error fetching patient data:', error);
       }
     },
-    submitForm() {
-      // Handle form submission
-      console.log('Color:', this.color);
-      console.log('Signs of Infection:', this.signsOfInfection);
-      console.log('Registered:', this.registered);
+    async submitForm() {
+      const observation = {
+        id: uuidv4(),
+        color: this.color,
+        signsOfInfection: this.signsOfInfection,
+        registered: this.registered
+      };
+
+      if (!this.wound.observations) {
+        this.wound.observations = [];
+      }
+      this.wound.observations.push(observation);
+
+      // Create a deep copy of the patient object without methods
+      const patientCopy = JSON.parse(JSON.stringify(this.patient));
+
+      try {
+        await savePatient(patientCopy);
+        console.log('Observation saved:', observation);
+        this.$router.push({ name: 'WoundView', params: { patientId: this.$route.params.patientId, woundId: this.$route.params.woundId } });
+      } catch (error) {
+        console.error('Error saving observation:', error);
+      }
     },
     cancel() {
       this.$router.push({ name: 'WoundView', params: { patientId: this.$route.params.patientId, woundId: this.$route.params.woundId } });
