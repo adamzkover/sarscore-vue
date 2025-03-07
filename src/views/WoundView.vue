@@ -37,6 +37,18 @@ onMounted(() => {
     <div class="alert alert-light" role="alert">
       Wound Details: {{ wound.type }} på {{ wound.location }} registrert {{ wound.registered }}
     </div>
+    <div v-if="wound.observations && wound.observations.length">
+      <h2>Existing Observations</h2>
+      <ul>
+        <li v-for="observation in wound.observations" :key="observation.id">
+          <p>ID: {{ observation.id }}</p>
+          <p>Color: {{ observation.color.join(', ') }}</p>
+          <p>Signs of Infection: {{ observation.signsOfInfection.join(', ') }}</p>
+          <p>Registered: {{ observation.registered }}</p>
+          <p v-if="observation.photo">Photo: <img :src="observation.photo" alt="Observation Photo" style="max-width: 100px; max-height: 100px;" /></p>
+        </li>
+      </ul>
+    </div>
   </div>
   <div v-else>
     <p>Loading...</p>
