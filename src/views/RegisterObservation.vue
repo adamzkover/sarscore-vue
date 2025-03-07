@@ -56,6 +56,12 @@
           <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
         </div>
       </div>
+      <div class="row mb-3">
+        <label for="photo" class="col-sm-2 col-form-label">Photo:</label>
+        <div class="col-sm-10">
+          <input id="photo" class="form-control" type="file" accept="image/*" capture="camera" @change="onFileChange" />
+        </div>
+      </div>
       <button type="button" class="btn btn-secondary" @click="cancel">Cancel</button>
       <button type="submit" class="btn btn-primary ms-3">Submit</button>
     </form>
@@ -74,7 +80,8 @@ export default {
       color: [],
       signsOfInfection: [],
       registered: new Date().toISOString().split('T')[0],
-      maxDate: new Date().toISOString().split('T')[0]
+      maxDate: new Date().toISOString().split('T')[0],
+      photo: null
     };
   },
   created() {
@@ -91,12 +98,48 @@ export default {
         console.error('Error fetching patient data:', error);
       }
     },
+    onFileChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const maxSize = 256;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > maxSize) {
+                height *= maxSize / width;
+                width = maxSize;
+              }
+            } else {
+              if (height > maxSize) {
+                width *= maxSize / height;
+                height = maxSize;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            this.photo = canvas.toDataURL(file.type);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
     async submitForm() {
       const observation = {
         id: uuidv4(),
         color: this.color,
         signsOfInfection: this.signsOfInfection,
-        registered: this.registered
+        registered: this.registered,
+        photo: this.photo
       };
 
       if (!this.wound.observations) {
