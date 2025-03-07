@@ -19,10 +19,7 @@ import 'bootstrap'
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/">Home</RouterLink>
-            </li>
-            <li class="nav-item">
-              <RouterLink class="nav-link" to="/patient/1">Patient</RouterLink>
+              <RouterLink class="nav-link" to="/patient/27115743487">Tore</RouterLink>
             </li>
           </ul>
         </div>
