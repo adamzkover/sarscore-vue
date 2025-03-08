@@ -62,9 +62,28 @@
           <input id="photo" class="form-control" type="file" accept="image/*" capture="camera" @change="onFileChange" />
         </div>
       </div>
-      <button type="button" class="btn btn-secondary" @click="cancel">Cancel</button>
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Cancel</button>
       <button type="submit" class="btn btn-primary ms-3">Submit</button>
     </form>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="cancelModalLabel">Confirm Cancellation</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to cancel? All changes will be lost.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to the form</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="proceedCancel">Confirm Cancellation</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -158,7 +177,7 @@ export default {
         console.error('Error saving observation:', error);
       }
     },
-    cancel() {
+    proceedCancel() {
       this.$router.push({ name: 'WoundView', params: { patientId: this.$route.params.patientId, woundId: this.$route.params.woundId } });
     }
   }
