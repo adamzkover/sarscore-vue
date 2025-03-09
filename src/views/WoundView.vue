@@ -33,6 +33,10 @@ onMounted(() => {
     console.error('Error fetching patient:', error);
   });
 });
+
+const changeFocus = (observationId) => {
+  focusOnObservation.value = observations.value.find(obs => obs.id === observationId);
+};
 </script>
 
 <template>
@@ -48,7 +52,13 @@ onMounted(() => {
     <div class="mt-3" v-if="wound.observations && wound.observations.length">
       <h2>Existing Observations</h2>
       <ObservationView v-if="focusOnObservation" :observation="focusOnObservation" />
-      <ObservationSummaryView v-for="observation in wound.observations" :key="observation.id" :observation="observation" :focusOnObservationId="focusOnObservation.id" />
+      <ObservationSummaryView
+        v-for="observation in wound.observations"
+        :key="observation.id"
+        :observation="observation"
+        :focusOnObservationId="focusOnObservation.id"
+        @changeFocus="changeFocus"
+      />
     </div>
   </div>
   <div v-else>
