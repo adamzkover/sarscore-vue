@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="alert alert-primary" role="alert">
+    <div class="alert alert-primary mt-3" role="alert">
       Patient: {{ patient.name }} (ID: {{ patient.id }})
     </div>
-    <div class="alert alert-light" role="alert">
+    <div class="alert alert-light mt-3" role="alert">
       Wound Details: {{ wound.type }} på {{ wound.location }} registrert {{ wound.registered }}
     </div>
     <h1>Register Observation</h1>

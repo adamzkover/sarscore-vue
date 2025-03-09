@@ -29,15 +29,15 @@ onMounted(() => {
 
 <template>
   <div v-if="patient">
-    <div class="alert alert-primary" role="alert">
+    <div class="alert alert-primary mt-3" role="alert">
       Patient: {{ patient.name }} (ID: {{ patient.id }})
     </div>
   </div>
   <div v-if="wound">
-    <div class="alert alert-light" role="alert">
+    <div class="alert alert-light mt-3" role="alert">
       Wound Details: {{ wound.type }} på {{ wound.location }} registrert {{ wound.registered }}
     </div>
-    <div v-if="wound.observations && wound.observations.length">
+    <div class="mt-3" v-if="wound.observations && wound.observations.length">
       <h2>Existing Observations</h2>
       <div class="card mb-3" v-for="observation in wound.observations" :key="observation.id">
         <div class="card-body">
@@ -53,7 +53,7 @@ onMounted(() => {
   <div v-else>
     <p>Loading...</p>
   </div>
-  <div class="row row-cols-auto mb-3">
+  <div class="row row-cols-auto mt-3">
     <div class="col">
       <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">
       Back to Patient View

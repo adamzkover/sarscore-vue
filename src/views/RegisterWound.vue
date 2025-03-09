@@ -11,8 +11,18 @@ const location = ref('');
 const type = ref('');
 const registered = ref(new Date().toISOString().substr(0, 10)); // Pre-set to current date
 const maxDate = new Date().toISOString().substr(0, 10); // Get current date for max attribute
-const locationOptions = ['Leg', 'Head', 'Arm']; // Define location options
-const typeOptions = ['Cut', 'Burn', 'Pressure ulcer']; // Define type options
+
+const locationOptions = {
+  'Hode og ansikt': ['Panne', 'Kinn', 'Nese', 'Lepper', 'Ører', 'Hodebunn'],
+  'Hals og nakke': ['Hals', 'Nakke'],
+  'Overekstremiteter': ['Skulder', 'Overarm', 'Albue', 'Underarm', 'Håndledd', 'Hånd', 'Fingre'],
+  'Thorax (brystkasse og rygg)': ['Bryst', 'Ribben', 'Øvre rygg', 'Nedre rygg'],
+  'Abdomen og bekken': ['Øvre del av magen', 'Nedre del av magen', 'Hofter', 'Lysken', 'Sete'],
+  'Underekstremiteter': ['Lår', 'Kne', 'Legg', 'Ankel', 'Fot', 'Tå'],
+  'Generelt kroppsområde': ['Andre kroppsdeler']
+}; // Define location options with categories
+
+const typeOptions = ['Kutt', 'Brannskade', 'Trykksår']; // Define type options with Norwegian names
 
 const patient = ref(null);
 
@@ -57,14 +67,16 @@ function proceedCancel() {
         <div class="col-sm-10">
           <select id="location" class="form-control" v-model="location" required>
             <option disabled value="">Velg</option>
-            <option v-for="option in locationOptions" :key="option" :value="option">{{ option }}</option>
+            <optgroup v-for="(options, category) in locationOptions" :label="category" :key="category">
+              <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
+            </optgroup>
           </select>
         </div>
       </div>
       <div class="row mb-3">
         <div class="col-sm-2"> </div>
         <div class="col-sm-10">
-          <p>[Avatar som alternativ input for Location]</p>
+          <p>[Avatar som alternativ input for Kroppsregion]</p>
         </div>
       </div>
       <div class="row mb-3">
