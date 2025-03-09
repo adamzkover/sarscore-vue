@@ -15,27 +15,31 @@
         <div class="col-sm-10">
           <div class="form-check">
             <input class="form-check-input" v-model="color" type="checkbox" value="pink" id="colorPink" />
-            <label class="form-check-label" for="colorPink"><span class="badge" style="background-color: #f2d3e1; color: #000">Rosa</span></label>
+            <label class="form-check-label" for="colorPink"><span class="badge" style="background-color: #f2d3e1;">&nbsp;</span> Rosa</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" v-model="color" type="checkbox" value="red" id="colorRed" />
-            <label class="form-check-label" for="colorRed"><span class="badge text-bg-danger">Rødt</span></label>
+            <label class="form-check-label" for="colorRed"><span class="badge" style="background-color: #e30b5c;">&nbsp;</span> Rødt (friskt granulasjonsvev)</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="color" type="checkbox" value="red2" id="colorRed2" />
+            <label class="form-check-label" for="colorRed2"><span class="badge" style="background-color: #8b0000;">&nbsp;</span> Vinrød (mulig lokal infeksjon)</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" v-model="color" type="checkbox" value="black" id="colorBlack" />
-            <label class="form-check-label" for="colorBlack"><span class="badge text-bg-dark">Svart</span></label>
+            <label class="form-check-label" for="colorBlack"><span class="badge text-bg-dark">&nbsp;</span> Svart (nekrose)</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" v-model="color" type="checkbox" value="yellow" id="colorYellow" />
-            <label class="form-check-label" for="colorYellow"><span class="badge text-bg-warning">Gult</span></label>
+            <label class="form-check-label" for="colorYellow"><span class="badge text-bg-warning">&nbsp;</span> Gult (nekrose)</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" v-model="color" type="checkbox" value="gray" id="colorGray" />
-            <label class="form-check-label" for="colorGray"><span class="badge text-bg-secondary">Grått</span></label>
+            <label class="form-check-label" for="colorGray"><span class="badge text-bg-secondary">&nbsp;</span> Grått</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" v-model="color" type="checkbox" value="white" id="colorWhite" />
-            <label class="form-check-label" for="colorWhite"><span class="badge text-bg-light">Hvitt</span></label>
+            <label class="form-check-label" for="colorWhite"><span class="badge text-bg-light">&nbsp;</span> Hvitt (sener/bein synlig)</label>
           </div>
         </div>
       </div>

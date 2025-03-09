@@ -27,14 +27,8 @@ import 'bootstrap'
     </nav>
   </header>
 
-  <main class="container mt-4">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <RouterView />
-        </div>
-      </div>
-    </div>
+  <main class="container">
+    <RouterView />
   </main>
 </template>
 

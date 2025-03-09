@@ -53,7 +53,7 @@ function proceedCancel() {
     <h1>Registrer nytt sår</h1>
     <form @submit.prevent="submitForm">
       <div class="row mb-3">
-        <label for="location" class="col-sm-2 col-form-label">Location:</label>
+        <label for="location" class="col-sm-2 col-form-label">Kroppsregion:</label>
         <div class="col-sm-10">
           <select id="location" class="form-control" v-model="location" required>
             <option disabled value="">Velg</option>
@@ -83,7 +83,7 @@ function proceedCancel() {
         </div>
       </div>
       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Cancel</button>
-      <button type="submit" class="btn btn-primary ms-3">Submit</button>
+      <button type="submit" class="btn btn-primary ms-3">Registrer</button>
     </form>
   </div>
 

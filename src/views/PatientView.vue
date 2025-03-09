@@ -30,39 +30,69 @@ function registerWound() {
 
 <template>
   <div v-if="patient">
-    <div class="card mb-3">
+    <div class="card mt-3">
       <div class="card-body">
         <h1>{{ patient.name }}</h1>
         <p>{{ patient.id }}</p>
       </div>
     </div>
-    <h2>Registrerte sår</h2>
-    <ul class="list-group mb-3">
-      <router-link
-        v-for="wound in patient.wounds"
-        :key="wound.id"
-        :to="{ name: 'WoundView', params: { patientId: patient.id, woundId: wound.id } }"
-        tag="li"
-        class="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <div>
-          <strong>ID:</strong> {{ wound.id }}, <strong>Location:</strong> {{ wound.location }}, <strong>Type:</strong> {{ wound.type }}
-          <br />
-          <strong>Registered:</strong> {{ wound.registered }}
-        </div>
-        <i class="fas fa-circle-play ms-3"></i>
-      </router-link>
-    </ul>
+    <div class="mt-3">
+      <h2>Registrerte sår</h2>
+      <ul class="list-group mb-3">
+        <li class="list-group-item list-group-item-action col">
+          <div class="row">
+            <div class="col-md-4">
+              <strong>Type</strong>
+            </div>
+            <div class="col-md-4">
+              <strong>Kroppsregion</strong>
+            </div>
+            <div class="col-md-3">
+              <strong>Registrert</strong>
+            </div>
+            <div class="col-md-1 text-end">
+              <!-- No title for the icon column -->
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item list-group-item-action col" v-for="wound in patient.wounds" :key="wound.id">
+          <router-link
+            :to="{ name: 'WoundView', params: { patientId: patient.id, woundId: wound.id } }"
+            class="stretched-link text-decoration-none text-body">
+            <div class="row">
+              <div class="col-md-4">
+                <p class="mb-1">{{ wound.type }}</p>
+              </div>
+              <div class="col-md-4">
+                <p class="mb-1">{{ wound.location }}</p>
+              </div>
+              <div class="col-md-3">
+                <small>{{ wound.registered }}</small>
+              </div>
+              <div class="col-md-1 text-end">
+                <i class="fas fa-circle-play"></i>
+              </div>
+            </div>
+          </router-link>
+          <!-- TODO Delete button -->
+        </li>
+      </ul>
+    </div>
   </div>
   <div v-else>
     <p>Loading...</p>
   </div>
-  <button class="btn btn-primary" @click="registerWound">Registrer nytt sår</button>
+  <div class="mt-3">
+    <button class="btn btn-primary" @click="registerWound">Registrer nytt sår</button>
+  </div>
 </template>
 
 <style scoped>
 /* Add any styles for the PatientView here */
 i.fas.fa-circle-play {
   font-size: 150%;
+}
+.list-group-item {
+  position: relative;
 }
 </style>
