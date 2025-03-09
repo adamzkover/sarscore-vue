@@ -11,6 +11,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "bootstrap": "^5.3.3",
     "bootstrap-vue": "^2.23.1",
     "gh-pages": "^6.3.0",
@@ -18,7 +19,7 @@
     "uuid": "^9.0.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
-    "@fortawesome/fontawesome-free": "^6.7.2"
+    "vue3-touch-events": "^5.0.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",

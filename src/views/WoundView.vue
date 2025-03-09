@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 import { getPatient } from '@/utils/indexedDB';
 import ObservationView from '@/components/ObservationView.vue';
 import ObservationSummaryView from '@/components/ObservationSummaryView.vue';
+import 'vue3-touch-events';
 
 const route = useRoute();
 const patient = ref(null);
@@ -37,6 +38,20 @@ onMounted(() => {
 const changeFocus = (observationId) => {
   focusOnObservation.value = observations.value.find(obs => obs.id === observationId);
 };
+
+const handleSwipeLeft = () => {
+  const currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
+  if (currentIndex < observations.value.length - 1) {
+    focusOnObservation.value = observations.value[currentIndex + 1];
+  }
+};
+
+const handleSwipeRight = () => {
+  const currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
+  if (currentIndex > 0) {
+    focusOnObservation.value = observations.value[currentIndex - 1];
+  }
+};
 </script>
 
 <template>
@@ -51,7 +66,9 @@ const changeFocus = (observationId) => {
     </div>
     <div class="mt-3" v-if="wound.observations && wound.observations.length">
       <h2>Existing Observations</h2>
-      <ObservationView v-if="focusOnObservation" :observation="focusOnObservation" />
+      <div v-touch:swipeleft="handleSwipeLeft" v-touch:swiperight="handleSwipeRight">
+        <ObservationView v-if="focusOnObservation" :observation="focusOnObservation" />
+      </div>
       <ObservationSummaryView
         v-for="observation in wound.observations"
         :key="observation.id"
