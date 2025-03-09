@@ -2,11 +2,14 @@
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getPatient } from '@/utils/indexedDB';
-import ObservationView from '@/components/ObservationView.vue'; // Import the new component
+import ObservationView from '@/components/ObservationView.vue';
+import ObservationSummaryView from '@/components/ObservationSummaryView.vue';
 
 const route = useRoute();
 const patient = ref(null);
 const wound = ref(null);
+const observations = ref([]);
+const focusOnObservation = ref(null);
 
 onMounted(() => {
   const patientId = route.params.patientId;
@@ -16,7 +19,11 @@ onMounted(() => {
     patient.value = fetchedPatient;
     if (patient.value && patient.value.wounds) {
       wound.value = patient.value.wounds[woundId];
-      if (!wound.value) {
+      if (wound.value) {
+        // Sort observations by registered date
+        observations.value = wound.value.observations.sort((a, b) => new Date(b.registered) - new Date(a.registered));
+        focusOnObservation.value = observations.value[0];
+      } else {
         console.error('Wound not found');
       }
     } else {
@@ -31,16 +38,17 @@ onMounted(() => {
 <template>
   <div v-if="patient">
     <div class="alert alert-primary mt-3" role="alert">
-      Patient: {{ patient.name }} (ID: {{ patient.id }})
+      Pasient: <strong>{{ patient.name }}</strong> ({{ patient.id }})
     </div>
   </div>
   <div v-if="wound">
     <div class="alert alert-light mt-3" role="alert">
-      Wound Details: {{ wound.type }} på {{ wound.location }} registrert {{ wound.registered }}
+      Registrert <strong>{{ wound.registered }}</strong>, Type: <strong>{{ wound.type }}</strong>, Kroppsregion: <strong>{{ wound.location }}</strong>
     </div>
     <div class="mt-3" v-if="wound.observations && wound.observations.length">
       <h2>Existing Observations</h2>
-      <ObservationView v-for="observation in wound.observations" :key="observation.id" :observation="observation" />
+      <ObservationView v-if="focusOnObservation" :observation="focusOnObservation" />
+      <ObservationSummaryView v-for="observation in wound.observations" :key="observation.id" :observation="observation" :focusOnObservationId="focusOnObservation.id" />
     </div>
   </div>
   <div v-else>

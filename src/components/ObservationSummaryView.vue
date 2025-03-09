@@ -1,12 +1,12 @@
 <template>
-  <div class="card mb-3">
+  <div class="card mb-3" :class="{ 'border-primary': observation.id === focusOnObservationId }">
     <div class="card-body">
       <div class="row">
-        <div class="col">
-          Registrert: {{ observation.registered }}
+        <div class="col col-auto" v-if="observation.photo">
+          <img :src="observation.photo" alt="Observation Photo" style="max-width: 128px; max-height: 128px;" />
         </div>
         <div class="col">
-          <p v-if="observation.photo"><img :src="observation.photo" alt="Observation Photo" style="max-width: 100px; max-height: 100px;" /></p>
+          Registrert: {{ observation.registered }}
         </div>
       </div>
     </div>
@@ -19,6 +19,10 @@ const props = defineProps({
   observation: {
     type: Object,
     required: true
+  },
+  focusOnObservationId: {
+    type: String,
+    required: false
   }
 });
 </script>
