@@ -62,7 +62,7 @@ const handleSwipeRight = () => {
   </div>
   <div v-if="wound">
     <div class="alert alert-light mt-3" role="alert">
-      Registrert <strong>{{ wound.registered }}</strong>, Type: <strong>{{ wound.type }}</strong>, Kroppsregion: <strong>{{ wound.location }}</strong>
+      Sår registrert: <strong>{{ wound.registered }}</strong>, Type: <strong>{{ wound.type }}</strong>, Kroppsregion: <strong>{{ wound.location }}</strong>
     </div>
     <div class="mt-3" v-if="wound.observations && wound.observations.length">
       <h2>Existing Observations</h2>
@@ -82,12 +82,12 @@ const handleSwipeRight = () => {
     <p>Loading...</p>
   </div>
   <div class="row row-cols-auto mt-3">
-    <div class="col">
+    <div class="col-sm-auto">
       <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">
       Back to Patient View
     </button>
     </div>
-    <div class="col">
+    <div class="col-sm-auto">
       <button class="btn btn-primary" @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">
       Register New Observation
     </button>
