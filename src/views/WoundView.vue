@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getPatient } from '@/utils/indexedDB';
+import ObservationView from '@/components/ObservationView.vue'; // Import the new component
 
 const route = useRoute();
 const patient = ref(null);
@@ -39,15 +40,7 @@ onMounted(() => {
     </div>
     <div class="mt-3" v-if="wound.observations && wound.observations.length">
       <h2>Existing Observations</h2>
-      <div class="card mb-3" v-for="observation in wound.observations" :key="observation.id">
-        <div class="card-body">
-          <p>ID: {{ observation.id }}</p>
-          <p>Color: {{ observation.color.join(', ') }}</p>
-          <p>Signs of Infection: {{ observation.signsOfInfection.join(', ') }}</p>
-          <p>Registered: {{ observation.registered }}</p>
-          <p v-if="observation.photo">Photo: <img :src="observation.photo" alt="Observation Photo" style="max-width: 100px; max-height: 100px;" /></p>
-        </div>
-      </div>
+      <ObservationView v-for="observation in wound.observations" :key="observation.id" :observation="observation" />
     </div>
   </div>
   <div v-else>

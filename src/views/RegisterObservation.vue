@@ -129,7 +129,7 @@ export default {
           const img = new Image();
           img.onload = () => {
             const canvas = document.createElement('canvas');
-            const maxSize = 256;
+            const maxSize = 1024;
             let width = img.width;
             let height = img.height;
 

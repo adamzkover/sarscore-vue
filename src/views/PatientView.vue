@@ -61,13 +61,13 @@ function registerWound() {
             class="stretched-link text-decoration-none text-body">
             <div class="row">
               <div class="col-4">
-                <p>{{ wound.type }}</p>
+                {{ wound.type }}
               </div>
               <div class="col-4">
-                <p>{{ wound.location }}</p>
+                {{ wound.location }}
               </div>
               <div class="col-3">
-                <p>{{ wound.registered }}</p>
+                {{ wound.registered }}
               </div>
               <div class="col-1 text-end">
                 <i class="fas fa-circle-play"></i>
