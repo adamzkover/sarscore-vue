@@ -66,7 +66,7 @@ const handleSwipeRight = () => {
     </div>
     <div class="mt-3" v-if="wound.observations && wound.observations.length">
       <h2>Existing Observations</h2>
-      <div v-touch:swipeleft="handleSwipeLeft" v-touch:swiperight="handleSwipeRight">
+      <div v-touch:swipe.left="handleSwipeLeft" v-touch:swipe.right="handleSwipeRight">
         <ObservationView v-if="focusOnObservation" :observation="focusOnObservation" />
       </div>
       <ObservationSummaryView

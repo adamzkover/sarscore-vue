@@ -1,6 +1,4 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 </script>
@@ -27,7 +25,7 @@ import 'bootstrap'
     </nav>
   </header>
 
-  <main class="container">
+  <main class="container mb-5">
     <RouterView />
   </main>
 </template>
