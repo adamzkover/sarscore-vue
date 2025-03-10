@@ -69,7 +69,7 @@ function registerWound() {
               <div class="col-3">
                 {{ wound.registered }}
               </div>
-              <div class="col-1 text-end">
+              <div class="col-1 d-flex align-items-center justify-content-end">
                 <i class="fas fa-circle-play"></i>
               </div>
             </div>
