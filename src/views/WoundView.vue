@@ -43,6 +43,8 @@ const handleSwipeLeft = () => {
   const currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
   if (currentIndex < observations.value.length - 1) {
     focusOnObservation.value = observations.value[currentIndex + 1];
+  } else {
+    focusOnObservation.value = observations.value[0]; // Wrap around to the first object
   }
 };
 
@@ -50,6 +52,8 @@ const handleSwipeRight = () => {
   const currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
   if (currentIndex > 0) {
     focusOnObservation.value = observations.value[currentIndex - 1];
+  } else {
+    focusOnObservation.value = observations.value[observations.value.length - 1]; // Wrap around to the last object
   }
 };
 </script>
