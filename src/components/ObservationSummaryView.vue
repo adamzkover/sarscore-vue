@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-3" :class="{ 'border-primary': observation.id === focusOnObservationId }" @click="$emit('changeFocus', observation.id)">
+  <div class="card mt-3" :class="{ 'border-primary': observation.id === focusOnObservationId }" @click="$emit('changeFocus', observation.id)">
     <div class="card-body">
       <div class="row">
         <div class="col col-auto" v-if="observation.photo">

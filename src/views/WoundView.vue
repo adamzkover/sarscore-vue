@@ -70,6 +70,14 @@ const handleSwipeRight = () => {
     </div>
     <div class="mt-3" v-if="wound.observations && wound.observations.length">
       <h2>Existing Observations</h2>
+      <div class="row">
+        <div class="col text-start">
+          <button class="btn btn-secondary" @click="handleSwipeRight"><i class="fas fa-arrow-left"></i> Forrige</button>
+        </div>
+        <div class="col text-end">
+          <button class="btn btn-secondary" @click="handleSwipeLeft">Neste <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
       <div v-touch:swipe.left="handleSwipeLeft" v-touch:swipe.right="handleSwipeRight">
         <ObservationView v-if="focusOnObservation" :observation="focusOnObservation" />
       </div>
@@ -85,7 +93,7 @@ const handleSwipeRight = () => {
   <div v-else>
     <p>Loading...</p>
   </div>
-  <div class="row">
+  <div class="row mt-3">
     <div class="col-md-auto">
       <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">
       Back to Patient View

@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-3">
+  <div class="card mt-3">
     <div class="card-body">
       <div class="row">
         <div class="col-md-auto" v-if="observation.photo">
