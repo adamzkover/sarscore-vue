@@ -9,7 +9,7 @@
     <h1>Register Observation</h1>
     <form @submit.prevent="submitForm">
       <div class="row mb-3">
-        <div class="col-sm-2 col-form-label">
+        <div class="col-sm-2">
           <p>Farge:</p>
         </div>
         <div class="col-sm-10">
@@ -44,24 +44,121 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div class="col-sm-2 col-form-label">
+        <div class="col-sm-2">
           <p>Infeksjonstegn:</p>
         </div>
         <div class="col-sm-10">
           <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="normalPhase" id="infNormalPhase" />
+            <label class="form-check-label" for="infNormalPhase">Normal inflammasjonsfase</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="delayedHealing" id="infDelayedHealing" />
+            <label class="form-check-label" for="infDelayedHealing">Forsinket sårtilheling</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="swelling" id="infSwelling" />
+            <label class="form-check-label" for="infSwelling">Hevelse</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="easilyBleedingWoundBed" id="infEasilyBleedingWoundBed" />
+            <label class="form-check-label" for="infEasilyBleedingWoundBed">Lettblødende sårbunn</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="localiedHeat" id="infLocalizedHeat" />
+            <label class="form-check-label" for="infLocalizedHeat">Lokal varme</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="pocketFormation" id="infPocketFormation" />
+            <label class="form-check-label" for="infPocketFormation">Lommedannelse</label>
+          </div>
+          <div class="form-check">
             <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="smell" id="infSmell" />
             <label class="form-check-label" for="infSmell">Lukt</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="discoloredExudate" id="infDiscoloredExudate" />
+            <label class="form-check-label" for="infDiscoloredExudate">Misfarget sårvæske</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="rubor" id="infRubor" />
+            <label class="form-check-label" for="infRubor">Rødme/rubor</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="slimySurface" id="infSlimySurface" />
+            <label class="form-check-label" for="infSlimySurface">Slimete overflate</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="increasingPain" id="infIncreasingPain" />
+            <label class="form-check-label" for="infIncreasingPain">Økende smerte</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="increasingSize" id="infIncreasingSize" />
+            <label class="form-check-label" for="infIncreasingSize">Økende størrelse</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="hypergranulation" id="infHypergranulation" />
+            <label class="form-check-label" for="infHypergranulation">Hypergranulering</label>
           </div>
         </div>
       </div>
       <div class="row mb-3">
-        <label for="registered" class="col-sm-2 col-form-label">Registered:</label>
+        <div class="col-sm-2">
+          <p>Er såret fuktig?</p>
+        </div>
+        <div class="col-sm-10">
+          <div class="form-check form-switch">
+            <input class="form-check-input" v-model="isMoist" type="checkbox" role="switch" value="isMoist" id="infIsMoist">
+            <label class="form-check-label" for="infIsMoist">Ja/Nei</label>
+          </div>
+          <!-- Moisture details -->
+          <div class="mt-3">
+            <label for="moistureLevel" class="form-label">Fuktighetsnivå:</label>
+            <input type="range" class="form-range" v-model="moistureLevel" id="moistureLevel" min="1" max="3" step="1" :disabled="!isMoist">
+            <div class="d-flex justify-content-between">
+              <span>Litt</span>
+              <span>Middels</span>
+              <span>Mye</span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <p>Farge på fuktighet:</p>
+            <div class="form-check">
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="serøs" id="moistureSerous" :disabled="!isMoist" />
+              <label class="form-check-label" for="moistureSerous">Serøs</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="hvit" id="moistureWhite" :disabled="!isMoist" />
+              <label class="form-check-label" for="moistureWhite">Hvit</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="gul" id="moistureYellow" :disabled="!isMoist" />
+              <label class="form-check-label" for="moistureYellow">Gul</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="grønn" id="moistureGreen" :disabled="!isMoist" />
+              <label class="form-check-label" for="moistureGreen">Grønn</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="rosa" id="moisturePink" :disabled="!isMoist" />
+              <label class="form-check-label" for="moisturePink">Rosa</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="lys rød" id="moistureLightRed" :disabled="!isMoist" />
+              <label class="form-check-label" for="moistureLightRed">Lys rød</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mb-3">
+        <label for="registered" class="col-sm-2 col-form-label">Registrert:</label>
         <div class="col-sm-10">
           <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
         </div>
       </div>
       <div class="row mb-3">
-        <label for="photo" class="col-sm-2 col-form-label">Photo:</label>
+        <label for="photo" class="col-sm-2 col-form-label">Bilde:</label>
         <div class="col-sm-10">
           <input id="photo" class="form-control" type="file" accept="image/*" capture="camera" @change="onFileChange" />
         </div>
@@ -102,6 +199,9 @@ export default {
       wound: {},
       color: [],
       signsOfInfection: [],
+      isMoist: false,
+      moistureLevel: 1,
+      moistureColor: [],
       registered: new Date().toISOString().split('T')[0],
       maxDate: new Date().toISOString().split('T')[0],
       photo: null
@@ -109,6 +209,14 @@ export default {
   },
   created() {
     this.fetchPatientData();
+  },
+  watch: {
+    isMoist(newValue) {
+      if (!newValue) {
+        this.moistureLevel = 1;
+        this.moistureColor = [];
+      }
+    }
   },
   methods: {
     async fetchPatientData() {
@@ -161,6 +269,9 @@ export default {
         id: uuidv4(),
         color: this.color,
         signsOfInfection: this.signsOfInfection,
+        isMoist: this.isMoist,
+        moistureLevel: this.isMoist ? this.moistureLevel : 1,
+        moistureColor: this.isMoist ? this.moistureColor : [],
         registered: this.registered,
         photo: this.photo
       };
