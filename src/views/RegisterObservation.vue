@@ -122,6 +122,15 @@
             </div>
           </div>
           <div class="mt-3">
+            <label for="moistureConsistency" class="form-label">Konsistens på fuktighet:</label>
+            <input type="range" class="form-range" v-model="moistureConsistency" id="moistureConsistency" min="1" max="3" step="1" :disabled="!isMoist">
+            <div class="d-flex justify-content-between">
+              <span>Tykk</span>
+              <span>Tynn</span>
+              <span>Grøtete</span>
+            </div>
+          </div>
+          <div class="mt-3">
             <p>Farge på fuktighet:</p>
             <div class="form-check">
               <input class="form-check-input" v-model="moistureColor" type="checkbox" value="serøs" id="moistureSerous" :disabled="!isMoist" />
@@ -148,6 +157,13 @@
               <label class="form-check-label" for="moistureLightRed">Lys rød</label>
             </div>
           </div>
+          <div class="mt-3">
+            <label for="moistureSmell" class="form-label">Lukt:</label>
+            <div class="form-check form-switch">
+              <input class="form-check-input" v-model="moistureSmell" type="checkbox" role="switch" id="moistureSmell" :disabled="!isMoist">
+              <label class="form-check-label" for="moistureSmell">Ja/Nei</label>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -163,8 +179,8 @@
           <input id="photo" class="form-control" type="file" accept="image/*" capture="camera" @change="onFileChange" />
         </div>
       </div>
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Cancel</button>
-      <button type="submit" class="btn btn-primary ms-3">Submit</button>
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Avbryt</button>
+      <button type="submit" class="btn btn-primary ms-3">Lagre</button>
     </form>
   </div>
 
@@ -201,7 +217,9 @@ export default {
       signsOfInfection: [],
       isMoist: false,
       moistureLevel: 1,
+      moistureConsistency: 1,
       moistureColor: [],
+      moistureSmell: false,
       registered: new Date().toISOString().split('T')[0],
       maxDate: new Date().toISOString().split('T')[0],
       photo: null
@@ -214,7 +232,9 @@ export default {
     isMoist(newValue) {
       if (!newValue) {
         this.moistureLevel = 1;
+        this.moistureConsistency = 1;
         this.moistureColor = [];
+        this.moistureSmell = false;
       }
     }
   },
@@ -271,7 +291,9 @@ export default {
         signsOfInfection: this.signsOfInfection,
         isMoist: this.isMoist,
         moistureLevel: this.isMoist ? this.moistureLevel : 1,
+        moistureConsistency: this.isMoist ? this.moistureConsistency : 1,
         moistureColor: this.isMoist ? this.moistureColor : [],
+        moistureSmell: this.isMoist ? this.moistureSmell : false,
         registered: this.registered,
         photo: this.photo
       };
