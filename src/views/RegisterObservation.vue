@@ -166,7 +166,86 @@
           </div>
         </div>
       </div>
-      
+      <div class="row mb-3">
+        <div class="col-sm-2">
+          <p>Sårkanter:</p>
+        </div>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" v-model="edge" type="checkbox" value="dry" id="edgeDry" />
+            <label class="form-check-label" for="edgeDry">Tørr, hard, opphøyet hud</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="edge" type="checkbox" value="edema" id="edgeEdema" />
+            <label class="form-check-label" for="edgeEdema">Ødemer i sårkanter</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="edge" type="checkbox" value="macerated" id="edgeMacerated" />
+            <label class="form-check-label" for="edgeMacerated">Oppbløtte sårkanter</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-2">
+          <p>Omkringliggende hud:</p>
+        </div>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" v-model="surroundingSkin" type="checkbox" value="drySkin" id="skinDry" />
+            <label class="form-check-label" for="skinDry">Tørr hud</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="surroundingSkin" type="checkbox" value="maceratedSkin" id="skinMacerated" />
+            <label class="form-check-label" for="skinMacerated">Oppbløtt hud</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="surroundingSkin" type="checkbox" value="redIrritatedSkin" id="skinRedIrritated" />
+            <label class="form-check-label" for="skinRedIrritated">Rød og irritert hud</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="surroundingSkin" type="checkbox" value="edematousSkin" id="skinEdematous" />
+            <label class="form-check-label" for="skinEdematous">Ødematøs</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="surroundingSkin" type="checkbox" value="eczema" id="skinEczema" />
+            <label class="form-check-label" for="skinEczema">Eksem</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" v-model="surroundingSkin" type="checkbox" value="discoloration" id="skinDiscoloration" />
+            <label class="form-check-label" for="skinDiscoloration">Fargeforandringer</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-2">
+          <p>Størrelse:</p>
+        </div>
+        <div class="col-sm-10">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-length">Lengde</span>
+            <input type="number" class="form-control" v-model="length" aria-label="Lengde" aria-describedby="inputGroup-length">
+            <span class="input-group-text">mm</span>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-width">Bredde</span>
+            <input type="number" class="form-control" v-model="width" aria-label="Bredde" aria-describedby="inputGroup-width">
+            <span class="input-group-text">mm</span>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-depth">Dybde</span>
+            <input type="number" class="form-control" v-model="depth" aria-label="Dybde" aria-describedby="inputGroup-depth">
+            <span class="input-group-text">mm</span>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-2">
+          <p>Kommentar:</p>
+        </div>
+        <div class="col-sm-10">
+          <textarea v-model="comment" class="form-control" rows="5" style="width: 100%;"></textarea>
+        </div>
+      </div>
       <div class="row mb-3">
         <label for="registered" class="col-sm-2 col-form-label">Registrert:</label>
         <div class="col-sm-10">
@@ -222,7 +301,13 @@ export default {
       moistureSmell: false,
       registered: new Date().toISOString().split('T')[0],
       maxDate: new Date().toISOString().split('T')[0],
-      photo: null
+      photo: null,
+      edge: [],
+      comment: '',
+      length: null,
+      width: null,
+      depth: null,
+      surroundingSkin: []
     };
   },
   created() {
@@ -295,7 +380,13 @@ export default {
         moistureColor: this.isMoist ? this.moistureColor : [],
         moistureSmell: this.isMoist ? this.moistureSmell : false,
         registered: this.registered,
-        photo: this.photo
+        photo: this.photo,
+        edge: this.edge,
+        comment: this.comment,
+        length: this.length,
+        width: this.width,
+        depth: this.depth,
+        surroundingSkin: this.surroundingSkin
       };
 
       if (!this.wound.observations) {
