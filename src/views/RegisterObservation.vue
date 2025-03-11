@@ -1,18 +1,20 @@
 <template>
   <div>
     <div class="alert alert-primary mt-3" role="alert">
-      Patient: {{ patient.name }} (ID: {{ patient.id }})
+      <strong>{{ patient.name }}</strong> ({{ patient.id }})
     </div>
     <div class="alert alert-light mt-3" role="alert">
-      Wound Details: {{ wound.type }} på {{ wound.location }} registrert {{ wound.registered }}
+      Type: <strong>{{ wound.type }}</strong>, Kroppsregion: <strong>{{ wound.location }}</strong>
+      <br/>Registrert: {{ wound.registered }}
     </div>
-    <h1>Register Observation</h1>
-    <form @submit.prevent="submitForm">
+    <h1 class="mt-3">Registrer tilstand</h1>
+    <form @submit.prevent="submitForm" class="mt-3">
       <div class="row mb-3">
         <div class="col-sm-2">
-          <p>Farge:</p>
+          <h2><span class="times-icon">T</span></h2>
         </div>
         <div class="col-sm-10">
+          <p>Farge:</p>
           <div class="form-check">
             <input class="form-check-input" v-model="color" type="checkbox" value="pink" id="colorPink" />
             <label class="form-check-label" for="colorPink"><span class="badge" style="background-color: #f2d3e1;">&nbsp;</span> Rosa</label>
@@ -45,9 +47,10 @@
       </div>
       <div class="row mb-3">
         <div class="col-sm-2">
-          <p>Infeksjonstegn:</p>
+          <h2><span class="times-icon">I</span></h2>
         </div>
         <div class="col-sm-10">
+          <p>Infeksjonstegn:</p>
           <div class="form-check">
             <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="normalPhase" id="infNormalPhase" />
             <label class="form-check-label" for="infNormalPhase">Normal inflammasjonsfase</label>
@@ -104,9 +107,10 @@
       </div>
       <div class="row mb-3">
         <div class="col-sm-2">
-          <p>Er såret fuktig?</p>
+          <h2><span class="times-icon">M</span></h2>
         </div>
         <div class="col-sm-10">
+          <p>Er såret fuktig?</p>
           <div class="form-check form-switch">
             <input class="form-check-input" v-model="isMoist" type="checkbox" role="switch" value="isMoist" id="infIsMoist">
             <label class="form-check-label" for="infIsMoist">Ja/Nei</label>
@@ -125,8 +129,8 @@
             <label for="moistureConsistency" class="form-label">Konsistens på fuktighet:</label>
             <input type="range" class="form-range" v-model="moistureConsistency" id="moistureConsistency" min="1" max="3" step="1" :disabled="!isMoist">
             <div class="d-flex justify-content-between">
-              <span>Tykk</span>
               <span>Tynn</span>
+              <span>Tykk</span>
               <span>Grøtete</span>
             </div>
           </div>
@@ -168,9 +172,10 @@
       </div>
       <div class="row mb-3">
         <div class="col-sm-2">
-          <p>Sårkanter:</p>
+          <h2><span class="times-icon">E</span></h2>
         </div>
         <div class="col-sm-10">
+          <p>Sårkanter:</p>
           <div class="form-check">
             <input class="form-check-input" v-model="edge" type="checkbox" value="dry" id="edgeDry" />
             <label class="form-check-label" for="edgeDry">Tørr, hard, opphøyet hud</label>
@@ -187,9 +192,10 @@
       </div>
       <div class="row mb-3">
         <div class="col-sm-2">
-          <p>Omkringliggende hud:</p>
+          <h2><span class="times-icon">S</span></h2>
         </div>
         <div class="col-sm-10">
+          <p>Omkringliggende hud:</p>
           <div class="form-check">
             <input class="form-check-input" v-model="surroundingSkin" type="checkbox" value="drySkin" id="skinDry" />
             <label class="form-check-label" for="skinDry">Tørr hud</label>
@@ -218,9 +224,10 @@
       </div>
       <div class="row mb-3">
         <div class="col-sm-2">
-          <p>Størrelse:</p>
+          <h2><span class="times-icon fa-solid fa-ruler"></span></h2>
         </div>
         <div class="col-sm-10">
+          <p>Størrelse:</p>
           <div class="input-group mb-3">
             <span class="input-group-text" style="width: 5rem;" id="inputGroup-length">Lengde</span>
             <input type="number" inputmode="decimal" class="form-control" v-model="length" aria-label="Lengde" aria-describedby="inputGroup-length">
@@ -240,21 +247,28 @@
       </div>
       <div class="row mb-3">
         <div class="col-sm-2">
-          <p>Kommentar:</p>
+          <h2><span class="times-icon fa-solid fa-pencil"></span></h2>
         </div>
         <div class="col-sm-10">
+          <p>Kommentar:</p>
           <textarea v-model="comment" class="form-control" rows="5" style="width: 100%;"></textarea>
         </div>
       </div>
       <div class="row mb-3">
-        <label for="registered" class="col-sm-2 col-form-label">Registrert:</label>
+        <div class="col-sm-2">
+          <h2><span class="times-icon fa-solid fa-calendar-days"></span></h2>
+        </div>
         <div class="col-sm-10">
+          <label for="registered" class="col-sm-2 col-form-label">Registrert:</label>
           <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
         </div>
       </div>
       <div class="row mb-3">
-        <label for="photo" class="col-sm-2 col-form-label">Bilde:</label>
+        <div class="col-sm-2">
+          <h2><span class="times-icon fa-solid fa-camera"></span></h2>
+        </div>
         <div class="col-sm-10">
+          <label for="photo" class="col-sm-2 col-form-label">Bilde:</label>
           <input id="photo" class="form-control" type="file" accept="image/*" capture="camera" @change="onFileChange" />
         </div>
       </div>
@@ -413,5 +427,14 @@ export default {
 </script>
 
 <style scoped>
+.times-icon {
+  align-content: center;
+  border: 1px solid #000;
+  border-radius: .5rem;
+  display: inline-block;
+  padding: .25rem;
+  text-align: center;
+  width: 3rem;
+}
 /* Add any necessary styles here */
 </style>
