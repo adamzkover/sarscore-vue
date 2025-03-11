@@ -222,18 +222,18 @@
         </div>
         <div class="col-sm-10">
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-length">Lengde</span>
-            <input type="number" class="form-control" v-model="length" aria-label="Lengde" aria-describedby="inputGroup-length">
+            <span class="input-group-text" style="width: 5rem;" id="inputGroup-length">Lengde</span>
+            <input type="number" inputmode="decimal" class="form-control" v-model="length" aria-label="Lengde" aria-describedby="inputGroup-length">
             <span class="input-group-text">mm</span>
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-width">Bredde</span>
-            <input type="number" class="form-control" v-model="width" aria-label="Bredde" aria-describedby="inputGroup-width">
+            <span class="input-group-text" style="width: 5rem;" id="inputGroup-width">Bredde</span>
+            <input type="number" inputmode="decimal" class="form-control" v-model="width" aria-label="Bredde" aria-describedby="inputGroup-width">
             <span class="input-group-text">mm</span>
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-depth">Dybde</span>
-            <input type="number" class="form-control" v-model="depth" aria-label="Dybde" aria-describedby="inputGroup-depth">
+            <span class="input-group-text" style="width: 5rem;" id="inputGroup-depth">Dybde</span>
+            <input type="number" inputmode="decimal" class="form-control" v-model="depth" aria-label="Dybde" aria-describedby="inputGroup-depth">
             <span class="input-group-text">mm</span>
           </div>
         </div>
