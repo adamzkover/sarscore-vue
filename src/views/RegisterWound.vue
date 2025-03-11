@@ -59,9 +59,9 @@ function proceedCancel() {
 
 <template>
   <div>
-    <div class="alert alert-primary" role="alert" v-if="patient">{{ patient.name }} ({{ patient.id }})</div>
-    <h1>Registrer nytt sår</h1>
-    <form @submit.prevent="submitForm">
+    <div class="alert alert-primary mt-3" role="alert" v-if="patient">{{ patient.name }} ({{ patient.id }})</div>
+    <h1 class="mt-3">Registrer nytt sår</h1>
+    <form @submit.prevent="submitForm" class="mt-3">
       <div class="row mb-3">
         <label for="location" class="col-sm-2 col-form-label">Kroppsregion:</label>
         <div class="col-sm-10">
@@ -94,7 +94,7 @@ function proceedCancel() {
           <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
         </div>
       </div>
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Cancel</button>
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Avbryt</button>
       <button type="submit" class="btn btn-primary ms-3">Registrer</button>
     </form>
   </div>
