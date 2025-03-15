@@ -4,6 +4,7 @@ import PatientView from '@/views/PatientView.vue'
 import RegisterWound from '@/views/RegisterWound.vue'
 import WoundView from '@/views/WoundView.vue'
 import RegisterObservation from '@/views/RegisterObservation.vue'
+import EditPatientView from '@/views/EditPatientView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/patient/:patientId/wound/:woundId/registerObservation',
       name: 'RegisterObservation',
       component: RegisterObservation
+    },
+    {
+      path: '/patient/:patientId/edit',
+      name: 'EditPatientView',
+      component: EditPatientView
     }
   ],
 })
