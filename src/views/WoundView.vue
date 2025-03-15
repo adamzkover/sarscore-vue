@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 import { getPatient } from '@/utils/indexedDB';
 import ObservationView from '@/components/ObservationView.vue';
 import ObservationSummaryView from '@/components/ObservationSummaryView.vue';
+import Observation from '@/models/Observation';
 import 'vue3-touch-events';
 
 const route = useRoute();
@@ -21,8 +22,27 @@ onMounted(() => {
     if (patient.value && patient.value.wounds) {
       wound.value = patient.value.wounds[woundId];
       if (wound.value) {
+        // Convert plain observation objects to Observation instances
+        observations.value = wound.value.observations.map(obs => new Observation(
+          obs.id,
+          obs.color,
+          obs.signsOfInfection,
+          obs.registered,
+          obs.photo,
+          obs.isMoist,
+          obs.moistureLevel,
+          obs.moistureConsistency,
+          obs.moistureColor,
+          obs.moistureSmell,
+          obs.edge,
+          obs.comment,
+          obs.length,
+          obs.width,
+          obs.depth,
+          obs.surroundingSkin
+        ));
         // Sort observations by registered date
-        observations.value = wound.value.observations.sort((a, b) => new Date(b.registered) - new Date(a.registered));
+        observations.value.sort((a, b) => new Date(b.registered) - new Date(a.registered));
         focusOnObservation.value = observations.value[0];
       } else {
         console.error('Wound not found');
@@ -82,7 +102,7 @@ const handleSwipeRight = () => {
         <ObservationView v-if="focusOnObservation" :observation="focusOnObservation" />
       </div>
       <ObservationSummaryView
-        v-for="observation in wound.observations"
+        v-for="observation in observations"
         :key="observation.id"
         :observation="observation"
         :focusOnObservationId="focusOnObservation.id"

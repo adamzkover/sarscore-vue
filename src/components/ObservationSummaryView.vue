@@ -7,11 +7,11 @@
         </div>
         <div class="col">
           <p class="times-section">
-            <span class="times-icon">T</span>
-            <span class="times-icon">I</span>
-            <span class="times-icon">M</span>
-            <span class="times-icon">E</span>
-            <span class="times-icon">S</span>
+            <span :class="['times-icon', `times-icon-${observationInstance.getTScore()}`]">T</span>
+            <span :class="['times-icon', `times-icon-${observationInstance.getIScore()}`]">I</span>
+            <span :class="['times-icon', `times-icon-${observationInstance.getMScore()}`]">M</span>
+            <span :class="['times-icon', `times-icon-${observationInstance.getEScore()}`]">E</span>
+            <span :class="['times-icon', `times-icon-${observationInstance.getSScore()}`]">S</span>
           </p>
           <p class="times-section">
             <span class="times-icon fa-solid fa-ruler"></span>
@@ -27,6 +27,7 @@
 </template>
 
 <script setup>
+import Observation from '@/models/Observation';
 
 const props = defineProps({
   observation: {
@@ -38,6 +39,14 @@ const props = defineProps({
     required: false
   }
 });
+
+const observationInstance = new Observation(
+  props.observation.id,
+  props.observation.color,
+  props.observation.signOfInfection,
+  props.observation.registered,
+  props.observation.photo
+);
 </script>
 
 <style scoped>
@@ -55,5 +64,14 @@ const props = defineProps({
   width: 2rem;
   height: 2rem;
   margin-right: .25rem;
+}
+.times-icon-green {
+  background-color: #d4edda; /* pale green */
+}
+.times-icon-yellow {
+  background-color: #fff3cd; /* pale yellow */
+}
+.times-icon-red {
+  background-color: #f8d7da; /* pale red */
 }
 </style>
