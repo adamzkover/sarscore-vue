@@ -6,9 +6,31 @@
           <img :src="observation.photo" alt="Observation Photo" class="observation-photo" />
         </div>
         <div class="col-md mt-3 mt-md-0">
-          <p>Color: {{ observation.color.join(', ') }}</p>
-          <p>Signs of Infection: {{ observation.signsOfInfection.join(', ') }}</p>
-          <p>Registered: {{ observation.registered }}</p>
+          <p class="times-section">
+            <span class="times-icon">T</span> {{ mapColorsToLabels(observation.color).join(', ') }}
+          </p>
+          <p class="times-section">
+            <span class="times-icon">I</span> {{ mapSignsOfInfectionToLabels(observation.signsOfInfection).join(', ') }}
+          </p>
+          <p class="times-section">
+            <span class="times-icon">M</span> {{ mapMoistureVariables(observation) }}
+          </p>
+          <p class="times-section">
+            <span class="times-icon">E</span> {{ mapEdgeConditionsToLabels(observation.edge).join(', ') }}
+          </p>
+          <p class="times-section">
+            <span class="times-icon">S</span> {{ mapSurroundingSkinToLabels(observation.surroundingSkin).join(', ') }}
+          </p>
+          <p class="times-section">
+            <span class="times-icon fa-solid fa-ruler"></span>
+            Lengde {{ observation.length }} x Bredde {{ observation.width }} x Dybde {{ observation.depth }} mm
+          </p>
+          <p class="times-section" v-if="observation.comment">
+            <span class="times-icon fa-solid fa-pencil"></span> {{ observation.comment }}
+          </p>
+          <p class="times-section">
+            <span class="times-icon fa-solid fa-calendar-days"></span> {{ observation.registered }}
+          </p>
         </div>
       </div>
     </div>
@@ -23,6 +45,106 @@ const props = defineProps({
     required: true
   }
 });
+
+const colorLabels = {
+  pink: 'Rosa',
+  red: 'Rødt (friskt granulasjonsvev)',
+  wineRed: 'Vinrød (mulig lokal infeksjon)',
+  black: 'Svart (nekrose)',
+  yellow: 'Gult (nekrose)',
+  gray: 'Grått',
+  white: 'Hvitt (sener/bein synlig)'
+};
+
+const mapColorsToLabels = (colors) => {
+  return colors.map(color => colorLabels[color] || color);
+};
+
+const infectionLabels = {
+  normalPhase: 'Normal inflammasjonsfase',
+  delayedHealing: 'Forsinket sårtilheling',
+  swelling: 'Hevelse',
+  easilyBleedingWoundBed: 'Lettblødende sårbunn',
+  localizedHeat: 'Lokal varme',
+  pocketFormation: 'Lommedannelse',
+  smell: 'Lukt',
+  discoloredExudate: 'Misfarget sårvæske',
+  rubor: 'Rødme/rubor',
+  slimySurface: 'Slimete overflate',
+  increasingPain: 'Økende smerte',
+  increasingSize: 'Økende størrelse',
+  hypergranulation: 'Hypergranulering'
+};
+
+const mapSignsOfInfectionToLabels = (signs) => {
+  return signs
+      ? signs.map(sign => infectionLabels[sign] || sign)
+      : [];
+};
+
+const mapMoistureVariables = (observation) => {
+  let moistureProperties = '';
+  if (observation.isMoist) {
+    moistureProperties += 'Sårvæske: ';
+  } else {
+    moistureProperties += 'Ingen sårvæske';
+    return moistureProperties;
+  }
+  moistureProperties += 'Mengde: ' + mapMoistureLevel(observation.moistureLevel);
+  moistureProperties += '; Konsistens: ' + mapMoistureConsistency(observation.moistureConsistency);
+  moistureProperties += '; Farge: ' + mapMoistureColorsToLabels(observation.moistureColor).join(', ');
+  moistureProperties += '; Lukt: ' + (observation.moistureSmell ? 'Ja' : 'Nei');
+
+  return moistureProperties;
+}
+
+const moistureColorLabels = {
+  serøs: 'Serøs',
+  hvit: 'Hvit',
+  gul: 'Gul',
+  grønn: 'Grønn',
+  rosa: 'Rosa',
+  'lys rød': 'Lys rød'
+};
+
+const mapMoistureColorsToLabels = (colors) => {
+  return colors.map(color => moistureColorLabels[color] || color);
+};
+
+const surroundingSkinLabels = {
+  drySkin: 'Tørr hud',
+  maceratedSkin: 'Oppbløtt hud',
+  redIrritatedSkin: 'Rød og irritert hud',
+  edematousSkin: 'Ødematøs',
+  eczema: 'Eksem',
+  discoloration: 'Fargeforandringer'
+};
+
+const mapSurroundingSkinToLabels = (skinConditions) => {
+  return skinConditions
+      ? skinConditions.map(condition => surroundingSkinLabels[condition] || condition)
+      : [];
+};
+
+const mapMoistureLevel = (moistureLevel) => {
+  const moistureLevelLabels = ['Ingen', 'Litt', 'Middels', 'Mye'];
+  return moistureLevelLabels[moistureLevel];
+};
+
+const mapMoistureConsistency = (moistureConsistency) => {
+  const moistureConsistencyLabels = ['Tynn', 'Tykk', 'Grøtete'];
+  return moistureConsistencyLabels[moistureConsistency];
+};
+
+const edgeLabels = {
+  dry: 'Tørr, hard, opphøyet hud',
+  edema: 'Ødemer i sårkanter',
+  macerated: 'Oppbløtte sårkanter'
+};
+
+const mapEdgeConditionsToLabels = (edges) => {
+  return edges ? edges.map(edge => edgeLabels[edge] || edge) : [];
+};
 </script>
 
 <style scoped>
@@ -33,5 +155,20 @@ const props = defineProps({
   .observation-photo {
     max-width: 256px;
   }
+}
+.times-section {
+  margin-bottom: .25rem;
+}
+.times-icon {
+  align-content: center;
+  border: 1px solid #000;
+  border-radius: .5rem;
+  display: inline-block;
+  padding: .25rem;
+  text-align: center;
+  font-weight: bold;
+  width: 2rem;
+  height: 2rem;
+  margin-right: .25rem;
 }
 </style>

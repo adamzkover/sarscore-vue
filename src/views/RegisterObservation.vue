@@ -24,8 +24,8 @@
             <label class="form-check-label" for="colorRed"><span class="badge" style="background-color: #e30b5c;">&nbsp;</span> Rødt (friskt granulasjonsvev)</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" v-model="color" type="checkbox" value="red2" id="colorRed2" />
-            <label class="form-check-label" for="colorRed2"><span class="badge" style="background-color: #8b0000;">&nbsp;</span> Vinrød (mulig lokal infeksjon)</label>
+            <input class="form-check-input" v-model="color" type="checkbox" value="wineRed" id="colorWineRed" />
+            <label class="form-check-label" for="colorWineRed"><span class="badge" style="background-color: #8b0000;">&nbsp;</span> Vinrød (mulig lokal infeksjon)</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" v-model="color" type="checkbox" value="black" id="colorBlack" />
