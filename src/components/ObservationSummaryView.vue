@@ -6,7 +6,20 @@
           <img :src="observation.photo" alt="Observation Photo" style="max-width: 128px; max-height: 128px;" />
         </div>
         <div class="col">
-          Registrert: {{ observation.registered }}
+          <p class="times-section">
+            <span class="times-icon">T</span>
+            <span class="times-icon">I</span>
+            <span class="times-icon">M</span>
+            <span class="times-icon">E</span>
+            <span class="times-icon">S</span>
+          </p>
+          <p class="times-section">
+            <span class="times-icon fa-solid fa-ruler"></span>
+            {{ observation.length }} x {{ observation.width }} x {{ observation.depth }} mm
+          </p>
+          <p class="times-section">
+            <span class="times-icon fa-solid fa-calendar-days"></span> {{ observation.registered }}
+          </p>
         </div>
       </div>
     </div>
@@ -28,5 +41,19 @@ const props = defineProps({
 </script>
 
 <style scoped>
-/* Add any styles for the ObservationSummaryView here */
+.times-section {
+  margin-bottom: .25rem;
+}
+.times-icon {
+  align-content: center;
+  border: 1px solid #000;
+  border-radius: .5rem;
+  display: inline-block;
+  padding: .25rem;
+  text-align: center;
+  font-weight: bold;
+  width: 2rem;
+  height: 2rem;
+  margin-right: .25rem;
+}
 </style>
