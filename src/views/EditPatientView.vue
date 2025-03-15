@@ -45,5 +45,8 @@ function saveData() {
 </template>
 
 <style scoped>
-/* Add any styles for the EditPatientView here */
+.delete-img {
+  width: 256px;
+  height: 256px;
+}
 </style>
