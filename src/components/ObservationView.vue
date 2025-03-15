@@ -7,19 +7,19 @@
         </div>
         <div class="col-md mt-3 mt-md-0">
           <p class="times-section">
-            <span class="times-icon">T</span> {{ mapColorsToLabels(observation.color).join(', ') }}
+            <span :class="['times-icon', `times-icon-${observation.getTScore()}`]">T</span> {{ mapColorsToLabels(observation.color).join(', ') }}
           </p>
           <p class="times-section">
-            <span class="times-icon">I</span> {{ mapSignsOfInfectionToLabels(observation.signsOfInfection).join(', ') }}
+            <span :class="['times-icon', `times-icon-${observation.getIScore()}`]">I</span> {{ mapSignsOfInfectionToLabels(observation.signsOfInfection).join(', ') }}
           </p>
           <p class="times-section">
-            <span class="times-icon">M</span> {{ mapMoistureVariables(observation) }}
+            <span :class="['times-icon', `times-icon-${observation.getMScore()}`]">M</span> {{ mapMoistureVariables(observation) }}
           </p>
           <p class="times-section">
-            <span class="times-icon">E</span> {{ mapEdgeConditionsToLabels(observation.edge).join(', ') }}
+            <span :class="['times-icon', `times-icon-${observation.getEScore()}`]">E</span> {{ mapEdgeConditionsToLabels(observation.edge).join(', ') }}
           </p>
           <p class="times-section">
-            <span class="times-icon">S</span> {{ mapSurroundingSkinToLabels(observation.surroundingSkin).join(', ') }}
+            <span :class="['times-icon', `times-icon-${observation.getSScore()}`]">S</span> {{ mapSurroundingSkinToLabels(observation.surroundingSkin).join(', ') }}
           </p>
           <p class="times-section">
             <span class="times-icon fa-solid fa-ruler"></span>
@@ -38,6 +38,7 @@
 </template>
 
 <script setup>
+import Observation from '@/models/Observation';
 
 const props = defineProps({
   observation: {
@@ -170,5 +171,14 @@ const mapEdgeConditionsToLabels = (edges) => {
   width: 2rem;
   height: 2rem;
   margin-right: .25rem;
+}
+.times-icon-green {
+  background-color: #d4edda; /* pale green */
+}
+.times-icon-yellow {
+  background-color: #fff3cd; /* pale yellow */
+}
+.times-icon-red {
+  background-color: #f8d7da; /* pale red */
 }
 </style>

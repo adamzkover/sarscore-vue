@@ -7,11 +7,11 @@
         </div>
         <div class="col">
           <p class="times-section">
-            <span :class="['times-icon', `times-icon-${observationInstance.getTScore()}`]">T</span>
-            <span :class="['times-icon', `times-icon-${observationInstance.getIScore()}`]">I</span>
-            <span :class="['times-icon', `times-icon-${observationInstance.getMScore()}`]">M</span>
-            <span :class="['times-icon', `times-icon-${observationInstance.getEScore()}`]">E</span>
-            <span :class="['times-icon', `times-icon-${observationInstance.getSScore()}`]">S</span>
+            <span :class="['times-icon', `times-icon-${observation.getTScore()}`]">T</span>
+            <span :class="['times-icon', `times-icon-${observation.getIScore()}`]">I</span>
+            <span :class="['times-icon', `times-icon-${observation.getMScore()}`]">M</span>
+            <span :class="['times-icon', `times-icon-${observation.getEScore()}`]">E</span>
+            <span :class="['times-icon', `times-icon-${observation.getSScore()}`]">S</span>
           </p>
           <p class="times-section">
             <span class="times-icon fa-solid fa-ruler"></span>
@@ -40,13 +40,6 @@ const props = defineProps({
   }
 });
 
-const observationInstance = new Observation(
-  props.observation.id,
-  props.observation.color,
-  props.observation.signOfInfection,
-  props.observation.registered,
-  props.observation.photo
-);
 </script>
 
 <style scoped>
