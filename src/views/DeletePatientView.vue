@@ -1,20 +1,22 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { savePatient } from '@/utils/indexedDB';
+import { deletePatient, initializePatient } from '@/utils/indexedDB';
 
 const route = useRoute();
 const router = useRouter();
 const errorMessage = ref('');
 
-function deleteData() {
+async function deleteData() {
   const patientId = route.params.patientId;
-  const emptyData = {};
-  savePatient({ id: patientId, ...emptyData }).then(() => {
+
+  try {
+    await deletePatient(patientId);
+    await initializePatient(patientId);
     router.push({ name: 'PatientView', params: { id: patientId } });
-  }).catch((error) => {
+  } catch (error) {
     errorMessage.value = 'Error deleting patient data: ' + error;
-  });
+  }
 }
 </script>
 
