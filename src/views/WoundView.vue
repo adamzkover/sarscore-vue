@@ -113,17 +113,9 @@ const handleSwipeRight = () => {
   <div v-else>
     <p>Loading...</p>
   </div>
-  <div class="row mt-3">
-    <div class="col-md-auto">
-      <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">
-      Back to Patient View
-    </button>
-    </div>
-    <div class="col-md-auto mt-3 mt-md-0">
-      <button class="btn btn-primary" @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">
-      Register New Observation
-    </button>
-    </div>
+  <div class="d-flex justify-content-between mt-3">
+    <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">Tilbake</button>
+    <button class="btn btn-primary" @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">Registrer sårobservasjon</button>
   </div>
 </template>
 

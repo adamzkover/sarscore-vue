@@ -7,6 +7,10 @@
         </div>
         <div class="col-md mt-3 mt-md-0">
           <p class="times-section">
+            <span class="times-icon fa-solid fa-ruler"></span>
+            Lengde {{ observation.length }} x Bredde {{ observation.width }} x Dybde {{ observation.depth }} mm
+          </p>
+          <p class="times-section">
             <span :class="['times-icon', `times-icon-${observation.getTScore()}`]">T</span> {{ mapColorsToLabels(observation.color).join(', ') }}
           </p>
           <p class="times-section">
@@ -20,10 +24,6 @@
           </p>
           <p class="times-section">
             <span :class="['times-icon', `times-icon-${observation.getSScore()}`]">S</span> {{ mapSurroundingSkinToLabels(observation.surroundingSkin).join(', ') }}
-          </p>
-          <p class="times-section">
-            <span class="times-icon fa-solid fa-ruler"></span>
-            Lengde {{ observation.length }} x Bredde {{ observation.width }} x Dybde {{ observation.depth }} mm
           </p>
           <p class="times-section" v-if="observation.comment">
             <span class="times-icon fa-solid fa-pencil"></span> {{ observation.comment }}
