@@ -7,8 +7,31 @@
       Type: <strong>{{ wound.type }}</strong>, Kroppsregion: <strong>{{ wound.location }}</strong>
       <br/>Registrert: {{ wound.registered }}
     </div>
-    <h1 class="mt-3">Registrer tilstand</h1>
+    <h1 class="mt-3">Registrer sårobservasjon</h1>
     <form @submit.prevent="submitForm" class="mt-3">
+      <div class="row mb-3">
+        <div class="col-sm-2">
+          <h2><span class="times-icon fa-solid fa-ruler"></span></h2>
+        </div>
+        <div class="col-sm-10">
+          <p>Størrelse:</p>
+          <div class="input-group mb-3">
+            <span class="input-group-text" style="width: 5rem;" id="inputGroup-length">Lengde</span>
+            <input type="number" inputmode="decimal" class="form-control" v-model="length" aria-label="Lengde" aria-describedby="inputGroup-length">
+            <span class="input-group-text">mm</span>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" style="width: 5rem;" id="inputGroup-width">Bredde</span>
+            <input type="number" inputmode="decimal" class="form-control" v-model="width" aria-label="Bredde" aria-describedby="inputGroup-width">
+            <span class="input-group-text">mm</span>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" style="width: 5rem;" id="inputGroup-depth">Dybde</span>
+            <input type="number" inputmode="decimal" class="form-control" v-model="depth" aria-label="Dybde" aria-describedby="inputGroup-depth">
+            <span class="input-group-text">mm</span>
+          </div>
+        </div>
+      </div>
       <div class="row mb-3">
         <div class="col-sm-2">
           <h2><span class="times-icon">T</span></h2>
@@ -34,14 +57,6 @@
           <div class="form-check">
             <input class="form-check-input" v-model="color" type="checkbox" value="yellow" id="colorYellow" />
             <label class="form-check-label" for="colorYellow"><span class="badge text-bg-warning">&nbsp;</span> Gult (nekrose)</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" v-model="color" type="checkbox" value="gray" id="colorGray" />
-            <label class="form-check-label" for="colorGray"><span class="badge text-bg-secondary">&nbsp;</span> Grått</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" v-model="color" type="checkbox" value="white" id="colorWhite" />
-            <label class="form-check-label" for="colorWhite"><span class="badge text-bg-light">&nbsp;</span> Hvitt (sener/bein synlig)</label>
           </div>
         </div>
       </div>
@@ -142,7 +157,7 @@
             </div>
             <div class="form-check">
               <input class="form-check-input" v-model="moistureColor" type="checkbox" value="hvit" id="moistureWhite" :disabled="!isMoist" />
-              <label class="form-check-label" for="moistureWhite">Hvit</label>
+              <label class="form-check-label" for="moistureWhite">Blakket</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" v-model="moistureColor" type="checkbox" value="gul" id="moistureYellow" :disabled="!isMoist" />
@@ -224,25 +239,11 @@
       </div>
       <div class="row mb-3">
         <div class="col-sm-2">
-          <h2><span class="times-icon fa-solid fa-ruler"></span></h2>
+          <h2><span class="times-icon fa-solid fa-camera"></span></h2>
         </div>
         <div class="col-sm-10">
-          <p>Størrelse:</p>
-          <div class="input-group mb-3">
-            <span class="input-group-text" style="width: 5rem;" id="inputGroup-length">Lengde</span>
-            <input type="number" inputmode="decimal" class="form-control" v-model="length" aria-label="Lengde" aria-describedby="inputGroup-length">
-            <span class="input-group-text">mm</span>
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" style="width: 5rem;" id="inputGroup-width">Bredde</span>
-            <input type="number" inputmode="decimal" class="form-control" v-model="width" aria-label="Bredde" aria-describedby="inputGroup-width">
-            <span class="input-group-text">mm</span>
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" style="width: 5rem;" id="inputGroup-depth">Dybde</span>
-            <input type="number" inputmode="decimal" class="form-control" v-model="depth" aria-label="Dybde" aria-describedby="inputGroup-depth">
-            <span class="input-group-text">mm</span>
-          </div>
+          <label for="photo" class="col-sm-2 col-form-label">Last opp bilde:</label>
+          <input id="photo" class="form-control" type="file" accept="image/*" capture="camera" @change="onFileChange" />
         </div>
       </div>
       <div class="row mb-3">
@@ -259,17 +260,8 @@
           <h2><span class="times-icon fa-solid fa-calendar-days"></span></h2>
         </div>
         <div class="col-sm-10">
-          <label for="registered" class="col-sm-2 col-form-label">Registrert:</label>
+          <label for="registered" class="col-sm-4 col-form-label">Dato for observasjoner:</label>
           <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-sm-2">
-          <h2><span class="times-icon fa-solid fa-camera"></span></h2>
-        </div>
-        <div class="col-sm-10">
-          <label for="photo" class="col-sm-2 col-form-label">Bilde:</label>
-          <input id="photo" class="form-control" type="file" accept="image/*" capture="camera" @change="onFileChange" />
         </div>
       </div>
       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Avbryt</button>
@@ -282,15 +274,15 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="cancelModalLabel">Confirm Cancellation</h1>
+          <h1 class="modal-title fs-5" id="cancelModalLabel">Er du sikker på at du vil avbryte registreringen?</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Are you sure you want to cancel? All changes will be lost.
+          All informasjon lagt inn i skjemaet i dag vil bli slettet.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to the form</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="proceedCancel">Confirm Cancellation</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nei, tilbake til skjema</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="proceedCancel">Ja, bekreft avbrytelse</button>
         </div>
       </div>
     </div>

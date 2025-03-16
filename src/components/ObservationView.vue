@@ -52,9 +52,7 @@ const colorLabels = {
   red: 'Rødt (friskt granulasjonsvev)',
   wineRed: 'Vinrød (mulig lokal infeksjon)',
   black: 'Svart (nekrose)',
-  yellow: 'Gult (nekrose)',
-  gray: 'Grått',
-  white: 'Hvitt (sener/bein synlig)'
+  yellow: 'Gult (nekrose)'
 };
 
 const mapColorsToLabels = (colors) => {
@@ -101,7 +99,7 @@ const mapMoistureVariables = (observation) => {
 
 const moistureColorLabels = {
   serøs: 'Serøs',
-  hvit: 'Hvit',
+  hvit: 'Blakket',
   gul: 'Gul',
   grønn: 'Grønn',
   rosa: 'Rosa',

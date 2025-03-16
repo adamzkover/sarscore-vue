@@ -24,22 +24,47 @@ export default class Observation {
   }
 
   getTScore() {
+    /*
+    green: Rosa, Rødt
+    yellow: Vinrød, Gult
+    red: Svart (hvis også fuktighet)
+    */
     return this.getRandomScore();
   }
 
   getIScore() {
+    /*
+    green:
+    yellow: Misfarget sårvæske; Forsinket sårtilheling
+    red: Lukt, Økende smerte; Økende størrelse; Lommedannelse; Hypergranulering
+    */
     return this.getRandomScore();
   }
 
   getMScore() {
+    /*
+    green: Ingen; Litt
+    yellow: Middels; Tynn sårvæske; Hvit sårvæske
+    red: Mye; Lukt uansett mengde; Grønn og tykk sårvæske
+    */
     return this.getRandomScore();
   }
 
   getEScore() {
+    /*
+    green: Hvis ingen er valgt
+    yellow: Tørr, hard, opphøyet hud; Ødemer i sårkanter
+    red: Oppbløtte sårkanter
+    */
     return this.getRandomScore();
   }
 
   getSScore() {
+    /*
+    green: Tørr hud;
+    yellow: Oppbløtt hud; Eksem; Fargeforandringer
+    red: Rød og irritert hud; Ødematøs
+    */
     return this.getRandomScore();
   }
 }
