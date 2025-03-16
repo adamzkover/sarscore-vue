@@ -264,8 +264,10 @@
           <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
         </div>
       </div>
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Avbryt</button>
-      <button type="submit" class="btn btn-primary ms-3">Lagre</button>
+      <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Avbryt</button>
+        <button type="submit" class="btn btn-primary">Lagre</button>
+      </div>
     </form>
   </div>
 

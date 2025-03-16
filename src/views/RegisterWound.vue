@@ -94,8 +94,10 @@ function proceedCancel() {
           <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
         </div>
       </div>
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Avbryt</button>
-      <button type="submit" class="btn btn-primary ms-3">Registrer</button>
+      <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">Avbryt</button>
+        <button type="submit" class="btn btn-primary ms-3">Registrer</button>
+      </div>
     </form>
   </div>
 
@@ -104,15 +106,15 @@ function proceedCancel() {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="cancelModalLabel">Confirm Cancellation</h1>
+          <h1 class="modal-title fs-5" id="cancelModalLabel">Er du sikker på at du vil avbryte registreringen?</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Are you sure you want to cancel? All changes will be lost.
+          All informasjon lagt inn i skjemaet i dag vil bli slettet.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to the form</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="proceedCancel">Confirm Cancellation</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nei, tilbake til skjema</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="proceedCancel">Ja, bekreft avbrytelse</button>
         </div>
       </div>
     </div>
