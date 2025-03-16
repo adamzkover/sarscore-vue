@@ -89,7 +89,7 @@ const handleSwipeRight = () => {
       Sår registrert: <strong>{{ wound.registered }}</strong>, Type: <strong>{{ wound.type }}</strong>, Kroppsregion: <strong>{{ wound.location }}</strong>
     </div>
     <div class="mt-3" v-if="wound.observations && wound.observations.length">
-      <h2>Existing Observations</h2>
+      <h2>Sårobservasjoner</h2>
       <div class="row">
         <div class="col text-start">
           <button class="btn btn-secondary" @click="handleSwipeRight"><i class="fas fa-arrow-left"></i> Forrige</button>
