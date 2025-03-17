@@ -18,53 +18,86 @@ export default class Observation {
     this.surroundingSkin = surroundingSkin;
   }
 
-  getRandomScore() {
-    const scores = ['green', 'yellow', 'red'];
-    return scores[Math.floor(Math.random() * scores.length)];
-  }
-
   getTScore() {
-    /*
-    green: Rosa, Rødt
-    yellow: Vinrød, Gult
-    red: Svart (hvis også fuktighet)
-    */
-    return this.getRandomScore();
+    if (!this.color || !Array.isArray(this.color)) {
+      return 'green';
+    }
+    if (this.color.includes('wineRed')
+        || this.color.includes('yellow')) {
+      return 'yellow';
+    }
+    if (this.color.includes('black')
+        && this.isMoist) {
+      return 'red';
+    }
+    return 'green';
   }
 
   getIScore() {
-    /*
-    green:
-    yellow: Misfarget sårvæske; Forsinket sårtilheling
-    red: Lukt, Økende smerte; Økende størrelse; Lommedannelse; Hypergranulering
-    */
-    return this.getRandomScore();
+    if (Array.isArray(this.signsOfInfection)) {
+      if (this.signsOfInfection.includes('smell')
+          || this.signsOfInfection.includes('increasingPain')
+          || this.signsOfInfection.includes('increasingSize')
+          || this.signsOfInfection.includes('pocketFormation')
+          || this.signsOfInfection.includes('hypergranulation')) {
+        return 'red';
+      }
+      if (this.signsOfInfection.includes('discoloredExudate')
+          || this.signsOfInfection.includes('delayedHealing')) {
+        return 'yellow';
+      }
+    }
+    return 'green';
   }
 
   getMScore() {
-    /*
-    green: Ingen; Litt
-    yellow: Middels; Tynn sårvæske; Hvit sårvæske
-    red: Mye; Lukt uansett mengde; Grønn og tykk sårvæske
-    */
-    return this.getRandomScore();
+    if (!this.isMoist
+        || (this.isMoist && this.moistureLevel == '1')) {
+      return 'green';
+    }
+    if (this.moistureLevel == '2'
+        || this.moistureConsistency == '1'
+        || (Array.isArray(this.moistureColor) && this.moistureColor.includes('hvit'))) {
+      return 'yellow';
+    }
+    if (this.moistureLevel == '3'
+        || this.moistureConsistency == '2'
+        || this.moistureConsistency == '3'
+        || this.moistureSmell
+        || (Array.isArray(this.moistureColor) && this.moistureColor.includes('grønn'))) {
+      return 'red';
+    }
+    return 'green';
   }
 
   getEScore() {
-    /*
-    green: Hvis ingen er valgt
-    yellow: Tørr, hard, opphøyet hud; Ødemer i sårkanter
-    red: Oppbløtte sårkanter
-    */
-    return this.getRandomScore();
+    if (!this.edge || !Array.isArray(this.edge)) {
+      return 'green';
+    }
+    if (this.edge.includes('macerated')) {
+      return 'red';
+    }
+    if (this.edge.includes('dry')
+        || this.edge.includes('edema')) {
+      return 'yellow';
+    }
+    return 'green';
   }
 
   getSScore() {
-    /*
-    green: Tørr hud;
-    yellow: Oppbløtt hud; Eksem; Fargeforandringer
-    red: Rød og irritert hud; Ødematøs
-    */
-    return this.getRandomScore();
+    if (!this.surroundingSkin || !Array.isArray(this.surroundingSkin)) {
+      return 'green';
+    }
+    if (this.surroundingSkin.includes('redIrritatedSkin')
+        || this.surroundingSkin.includes('edematousSkin')) {
+      return 'red';
+    }
+    if (this.surroundingSkin.includes('maceratedSkin')
+        || this.surroundingSkin.includes('eczema')
+        || this.surroundingSkin.includes('discoloration')) {
+      return 'yellow';
+    }
+    return 'green';
   }
+
 }
