@@ -3,6 +3,7 @@ const DB_VERSION = 1;
 const STORE_NAME = 'patients';
 
 import Patient from '@/models/Patient';
+import initialData from '@/assets/initialData.json';
 
 function openDB() {
     return new Promise((resolve, reject) => {
@@ -79,11 +80,11 @@ function savePatient(patient) {
     });
 }
 
-async function initializePatient(patientId = '27115743487', patientName = 'Tore Hjemmekjær') {
+async function initializePatient() {
     try {
-        const patient = await getPatient(patientId);
+        const patient = await getPatient(initialData.id);
         if (!patient) {
-            const newPatient = new Patient(patientId, patientName, {});
+            const newPatient = new Patient(initialData.id, initialData.name, initialData.wounds);
             await addPatient(newPatient);
             console.log('Patient created:', newPatient);
         } else {
