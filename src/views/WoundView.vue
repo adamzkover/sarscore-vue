@@ -61,19 +61,19 @@ const changeFocus = (observationId) => {
 
 const handleSwipeLeft = () => {
   const currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
-  if (currentIndex < observations.value.length - 1) {
-    focusOnObservation.value = observations.value[currentIndex + 1];
+  if (currentIndex > 0) {
+    focusOnObservation.value = observations.value[currentIndex - 1];
   } else {
-    focusOnObservation.value = observations.value[0]; // Wrap around to the first object
+    focusOnObservation.value = observations.value[observations.value.length - 1]; // Wrap around to the last object
   }
 };
 
 const handleSwipeRight = () => {
   const currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
-  if (currentIndex > 0) {
-    focusOnObservation.value = observations.value[currentIndex - 1];
+  if (currentIndex < observations.value.length - 1) {
+    focusOnObservation.value = observations.value[currentIndex + 1];
   } else {
-    focusOnObservation.value = observations.value[observations.value.length - 1]; // Wrap around to the last object
+    focusOnObservation.value = observations.value[0]; // Wrap around to the first object
   }
 };
 </script>
@@ -92,10 +92,10 @@ const handleSwipeRight = () => {
       <h2>Sårobservasjoner</h2>
       <div class="row">
         <div class="col text-start">
-          <button class="btn btn-secondary" @click="handleSwipeRight"><i class="fas fa-arrow-left"></i> Forrige</button>
+          <button class="btn btn-secondary" @click="handleSwipeRight"><i class="fas fa-arrow-left"></i> Eldre</button>
         </div>
         <div class="col text-end">
-          <button class="btn btn-secondary" @click="handleSwipeLeft">Neste <i class="fas fa-arrow-right"></i></button>
+          <button class="btn btn-secondary" @click="handleSwipeLeft">Nyere <i class="fas fa-arrow-right"></i></button>
         </div>
       </div>
       <div v-touch:swipe.left="handleSwipeLeft" v-touch:swipe.right="handleSwipeRight">
