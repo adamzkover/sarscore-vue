@@ -12,6 +12,9 @@ const patient = ref(null);
 const wound = ref(null);
 const observations = ref([]);
 const focusOnObservation = ref(null);
+let currentIndex = 0;
+const canSwipeLeft = ref(false);
+const canSwipeRight = ref(false);
 
 onMounted(() => {
   const patientId = route.params.patientId;
@@ -44,6 +47,7 @@ onMounted(() => {
         // Sort observations by registered date
         observations.value.sort((a, b) => new Date(b.registered) - new Date(a.registered));
         focusOnObservation.value = observations.value[0];
+        updateSwipeButtons();
       } else {
         console.error('Wound not found');
       }
@@ -57,24 +61,29 @@ onMounted(() => {
 
 const changeFocus = (observationId) => {
   focusOnObservation.value = observations.value.find(obs => obs.id === observationId);
+  updateSwipeButtons();
 };
 
 const handleSwipeLeft = () => {
-  const currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
+  currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
   if (currentIndex > 0) {
     focusOnObservation.value = observations.value[currentIndex - 1];
-  } else {
-    focusOnObservation.value = observations.value[observations.value.length - 1]; // Wrap around to the last object
+    updateSwipeButtons();
   }
 };
 
 const handleSwipeRight = () => {
-  const currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
+  currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
   if (currentIndex < observations.value.length - 1) {
     focusOnObservation.value = observations.value[currentIndex + 1];
-  } else {
-    focusOnObservation.value = observations.value[0]; // Wrap around to the first object
+    updateSwipeButtons();
   }
+};
+
+const updateSwipeButtons = () => {
+  currentIndex = observations.value.findIndex(obs => obs.id === focusOnObservation.value.id);
+  canSwipeLeft.value = currentIndex > 0;
+  canSwipeRight.value = currentIndex < observations.value.length - 1;
 };
 </script>
 
@@ -92,10 +101,10 @@ const handleSwipeRight = () => {
       <h2>Sårobservasjoner</h2>
       <div class="row">
         <div class="col text-start">
-          <button class="btn btn-secondary" @click="handleSwipeRight"><i class="fas fa-arrow-left"></i> Eldre</button>
+          <button class="btn btn-secondary" @click="handleSwipeRight" :disabled="!canSwipeRight"><i class="fas fa-arrow-left"></i> Eldre</button>
         </div>
         <div class="col text-end">
-          <button class="btn btn-secondary" @click="handleSwipeLeft">Nyere <i class="fas fa-arrow-right"></i></button>
+          <button class="btn btn-secondary" @click="handleSwipeLeft" :disabled="!canSwipeLeft">Nyere <i class="fas fa-arrow-right"></i></button>
         </div>
       </div>
       <div v-touch:swipe.left="handleSwipeLeft" v-touch:swipe.right="handleSwipeRight">
