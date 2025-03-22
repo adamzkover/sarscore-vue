@@ -32,7 +32,6 @@ onMounted(() => {
           obs.signsOfInfection,
           obs.registered,
           obs.photo,
-          obs.isMoist,
           obs.moistureLevel,
           obs.moistureConsistency,
           obs.moistureColor,

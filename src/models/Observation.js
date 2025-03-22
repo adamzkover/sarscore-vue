@@ -1,11 +1,10 @@
 export default class Observation {
-  constructor(id, color, signsOfInfection, registered, photo, isMoist, moistureLevel, moistureConsistency, moistureColor, moistureSmell, edge, comment, length, width, depth, surroundingSkin) {
+  constructor(id, color, signsOfInfection, registered, photo, moistureLevel, moistureConsistency, moistureColor, moistureSmell, edge, comment, length, width, depth, surroundingSkin) {
     this.id = id;
     this.color = color;
     this.signsOfInfection = signsOfInfection;
     this.registered = registered;
     this.photo = photo;
-    this.isMoist = isMoist;
     this.moistureLevel = moistureLevel;
     this.moistureConsistency = moistureConsistency;
     this.moistureColor = moistureColor;
@@ -27,7 +26,7 @@ export default class Observation {
       return 'yellow';
     }
     if (this.color.includes('black')
-        && this.isMoist) {
+        && this.moistureLevel > 0) {
       return 'red';
     }
     return 'green';
@@ -51,18 +50,17 @@ export default class Observation {
   }
 
   getMScore() {
-    if (!this.isMoist
-        || (this.isMoist && this.moistureLevel == '1')) {
+    if (this.moistureLevel <= 1) {
       return 'green';
     }
-    if (this.moistureLevel == '2'
-        || this.moistureConsistency == '1'
+    if (this.moistureLevel === 2
+        || this.moistureConsistency === 1
         || (Array.isArray(this.moistureColor) && this.moistureColor.includes('hvit'))) {
       return 'yellow';
     }
-    if (this.moistureLevel == '3'
-        || this.moistureConsistency == '2'
-        || this.moistureConsistency == '3'
+    if (this.moistureLevel === 3
+        || this.moistureConsistency === 2
+        || this.moistureConsistency === 3
         || this.moistureSmell
         || (Array.isArray(this.moistureColor) && this.moistureColor.includes('grønn'))) {
       return 'red';

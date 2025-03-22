@@ -83,14 +83,14 @@ const infectionLabels = {
 };
 
 const mapSignsOfInfectionToLabels = (signs) => {
-  return signs
-      ? signs.map(sign => infectionLabels[sign] || sign)
-      : [];
+  return signs.length === 0
+      ? ['Ingen tegn på infeksjon']
+      : signs.map(sign => infectionLabels[sign] || sign);
 };
 
 const mapMoistureVariables = (observation) => {
   let moistureProperties = '';
-  if (observation.isMoist) {
+  if (observation.moistureLevel > 0) {
     moistureProperties += 'Sårvæske: ';
   } else {
     moistureProperties += 'Ingen sårvæske';

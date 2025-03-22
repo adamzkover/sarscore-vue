@@ -125,24 +125,17 @@
           <h2><span class="times-icon">M</span></h2>
         </div>
         <div class="col-sm-10">
-          <p class="fw-bold">Er såret fuktig?</p>
-          <div class="form-check form-switch">
-            <input class="form-check-input" v-model="isMoist" type="checkbox" role="switch" value="isMoist" id="infIsMoist">
-            <label class="form-check-label" for="infIsMoist">Ja/Nei</label>
-          </div>
-          <!-- Moisture details -->
-          <div class="mt-3">
-            <label for="moistureLevel" class="form-label">Fuktighetsnivå:</label>
-            <input type="range" class="form-range" v-model="moistureLevel" id="moistureLevel" min="1" max="3" step="1" :disabled="!isMoist">
-            <div class="d-flex justify-content-between">
-              <span>Litt</span>
-              <span>Middels</span>
-              <span>Mye</span>
-            </div>
+          <p class="fw-bold">Fuktighetsnivå:</p>
+          <input type="range" class="form-range" v-model.number="moistureLevel" id="moistureLevel" min="0" max="3" step="1">
+          <div class="d-flex justify-content-between">
+            <span>Ingen</span>
+            <span>Litt</span>
+            <span>Middels</span>
+            <span>Mye</span>
           </div>
           <div class="mt-3">
             <label for="moistureConsistency" class="form-label">Konsistens på fuktighet:</label>
-            <input type="range" class="form-range" v-model="moistureConsistency" id="moistureConsistency" min="1" max="3" step="1" :disabled="!isMoist">
+            <input type="range" class="form-range" v-model="moistureConsistency" id="moistureConsistency" min="1" max="3" step="1" :disabled="isMoistureDisabled">
             <div class="d-flex justify-content-between">
               <span>Tynn</span>
               <span>Tykk</span>
@@ -152,35 +145,35 @@
           <div class="mt-3">
             <p>Farge på fuktighet:</p>
             <div class="form-check fs-5">
-              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="serøs" id="moistureSerous" :disabled="!isMoist" />
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="serøs" id="moistureSerous" :disabled="isMoistureDisabled" />
               <label class="form-check-label" for="moistureSerous">Serøs</label>
             </div>
             <div class="form-check fs-5">
-              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="hvit" id="moistureWhite" :disabled="!isMoist" />
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="hvit" id="moistureWhite" :disabled="isMoistureDisabled" />
               <label class="form-check-label" for="moistureWhite">Blakket</label>
             </div>
             <div class="form-check fs-5">
-              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="gul" id="moistureYellow" :disabled="!isMoist" />
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="gul" id="moistureYellow" :disabled="isMoistureDisabled" />
               <label class="form-check-label" for="moistureYellow">Gul</label>
             </div>
             <div class="form-check fs-5">
-              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="grønn" id="moistureGreen" :disabled="!isMoist" />
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="grønn" id="moistureGreen" :disabled="isMoistureDisabled" />
               <label class="form-check-label" for="moistureGreen">Grønn</label>
             </div>
             <div class="form-check fs-5">
-              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="rosa" id="moisturePink" :disabled="!isMoist" />
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="rosa" id="moisturePink" :disabled="isMoistureDisabled" />
               <label class="form-check-label" for="moisturePink">Rosa</label>
             </div>
             <div class="form-check fs-5">
-              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="lys rød" id="moistureLightRed" :disabled="!isMoist" />
+              <input class="form-check-input" v-model="moistureColor" type="checkbox" value="lys rød" id="moistureLightRed" :disabled="isMoistureDisabled" />
               <label class="form-check-label" for="moistureLightRed">Lys rød</label>
             </div>
           </div>
           <div class="mt-3">
             <label for="moistureSmell" class="form-label">Lukt:</label>
-            <div class="form-check form-switch">
-              <input class="form-check-input" v-model="moistureSmell" type="checkbox" role="switch" id="moistureSmell" :disabled="!isMoist">
-              <label class="form-check-label" for="moistureSmell">Ja/Nei</label>
+            <div class="form-check fs-5">
+              <input class="form-check-input" v-model="moistureSmell" type="checkbox" id="moistureSmell" :disabled="isMoistureDisabled" />
+              <label class="form-check-label" for="moistureSmell">Ja</label>
             </div>
           </div>
         </div>
@@ -302,8 +295,7 @@ export default {
       wound: {},
       color: [],
       signsOfInfection: [],
-      isMoist: false,
-      moistureLevel: 1,
+      moistureLevel: 0, // Default to "None"
       moistureConsistency: 1,
       moistureColor: [],
       moistureSmell: false,
@@ -318,13 +310,17 @@ export default {
       surroundingSkin: []
     };
   },
+  computed: {
+    isMoistureDisabled() {
+      return Number(this.moistureLevel) === 0;
+    }
+  },
   created() {
     this.fetchPatientData();
   },
   watch: {
-    isMoist(newValue) {
-      if (!newValue) {
-        this.moistureLevel = 1;
+    moistureLevel(newValue) {
+      if (Number(newValue) === 0) {
         this.moistureConsistency = 1;
         this.moistureColor = [];
         this.moistureSmell = false;
@@ -382,11 +378,10 @@ export default {
         id: uuidv4(),
         color: this.color,
         signsOfInfection: this.signsOfInfection,
-        isMoist: this.isMoist,
-        moistureLevel: this.isMoist ? this.moistureLevel : 1,
-        moistureConsistency: this.isMoist ? this.moistureConsistency : 1,
-        moistureColor: this.isMoist ? this.moistureColor : [],
-        moistureSmell: this.isMoist ? this.moistureSmell : false,
+        moistureLevel: this.moistureLevel,
+        moistureConsistency: this.moistureLevel !== 0 ? this.moistureConsistency : 1,
+        moistureColor: this.moistureLevel !== 0 ? this.moistureColor : [],
+        moistureSmell: this.moistureLevel !== 0 ? this.moistureSmell : false,
         registered: this.registered,
         photo: this.photo,
         edge: this.edge,
