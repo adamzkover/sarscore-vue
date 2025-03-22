@@ -254,7 +254,7 @@
         </div>
         <div class="col-sm-10">
           <label for="registered" class="col-sm-4 col-form-label fw-bold">Dato for observasjoner:</label>
-          <input id="registered" class="form-control" v-model="registered" type="date" :max="maxDate" required />
+          <input id="registered" class="form-control" v-model="registered" type="datetime-local" :max="maxDate" required />
         </div>
       </div>
       <div class="d-flex justify-content-between mt-3">
@@ -299,8 +299,8 @@ export default {
       moistureConsistency: 1,
       moistureColor: [],
       moistureSmell: false,
-      registered: new Date().toISOString().split('T')[0],
-      maxDate: new Date().toISOString().split('T')[0],
+      registered: new Date().toISOString().slice(0, 16),
+      maxDate: new Date().toISOString().slice(0, 16),
       photo: null,
       edge: [],
       comment: '',
@@ -316,6 +316,7 @@ export default {
     }
   },
   created() {
+    this.setNorwegianTimeZone();
     this.fetchPatientData();
   },
   watch: {
@@ -328,6 +329,13 @@ export default {
     }
   },
   methods: {
+    setNorwegianTimeZone() {
+      const now = new Date();
+      const offset = now.getTimezoneOffset() * 60000;
+      const localISOTime = new Date(now.getTime() - offset).toISOString().slice(0, 16);
+      this.registered = localISOTime;
+      this.maxDate = localISOTime;
+    },
     async fetchPatientData() {
       const patientId = this.$route.params.patientId;
       try {
