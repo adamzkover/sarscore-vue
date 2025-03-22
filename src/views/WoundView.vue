@@ -96,9 +96,13 @@ const updateSwipeButtons = () => {
     <div class="alert alert-light mt-3" role="alert">
       Sår registrert: <strong>{{ wound.registered }}</strong>, Type: <strong>{{ wound.type }}</strong>, Kroppsregion: <strong>{{ wound.location }}</strong>
     </div>
-    <div class="mt-3" v-if="wound.observations && wound.observations.length">
+    <div class="d-flex justify-content-between mt-3">
+      <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">Tilbake</button>
+      <button class="btn btn-primary" @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">Registrer sårobservasjon</button>
+    </div>
+    <div class="mt-5" v-if="wound.observations && wound.observations.length">
       <h2>Sårobservasjoner</h2>
-      <div class="row">
+      <div class="row mt-3">
         <div class="col text-start">
           <button class="btn btn-secondary" @click="handleSwipeRight" :disabled="!canSwipeRight"><i class="fas fa-arrow-left"></i> Eldre</button>
         </div>
