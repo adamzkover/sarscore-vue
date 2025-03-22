@@ -83,7 +83,7 @@
             <label class="form-check-label" for="infEasilyBleedingWoundBed">Lettblødende sårbunn</label>
           </div>
           <div class="form-check fs-5">
-            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="localiedHeat" id="infLocalizedHeat" />
+            <input class="form-check-input" v-model="signsOfInfection" type="checkbox" value="localizedHeat" id="infLocalizedHeat" />
             <label class="form-check-label" for="infLocalizedHeat">Lokal varme</label>
           </div>
           <div class="form-check fs-5">
