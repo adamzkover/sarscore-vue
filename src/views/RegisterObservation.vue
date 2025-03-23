@@ -4,8 +4,7 @@
       <strong>{{ patient.name }}</strong> ({{ patient.id }})
     </div>
     <div class="alert alert-light mt-3" role="alert">
-      Type: <strong>{{ wound.type }}</strong>, Kroppsregion: <strong>{{ wound.location }}</strong>
-      <br/>Registrert: {{ wound.registered }}
+      Sår registrert: <strong>{{ wound.registered }}</strong>, Type: <strong>{{ wound.type }}</strong>, Kroppsregion: <strong>{{ wound.location }}</strong>
     </div>
     <h1 class="mt-3">Registrer sårobservasjon</h1>
     <form @submit.prevent="submitForm" class="fs-5 mt-3">
