@@ -125,7 +125,7 @@ const updateSwipeButtons = () => {
   <div v-else>
     <p>Loading...</p>
   </div>
-  <div class="d-flex justify-content-between mt-3">
+  <div class="d-flex justify-content-between mt-3" v-if="observations.length > 0">
     <button class="btn btn-secondary" @click="$router.push({ name: 'PatientView', params: { id: patient.id } })">Tilbake</button>
     <button class="btn btn-primary" @click="$router.push({ name: 'RegisterObservation', params: { woundId: wound.id } })">Registrer sårobservasjon</button>
   </div>
