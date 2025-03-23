@@ -8,7 +8,7 @@
         <div class="col-md mt-3 mt-md-0">
           <p class="times-section">
             <span class="times-icon fa-solid fa-calendar-days"></span>
-            {{ observation.registered }}
+            {{ observation.registered.replace('T', ' ') }}
           </p>
           <p class="times-section">
             <span class="times-icon fa-solid fa-ruler"></span>

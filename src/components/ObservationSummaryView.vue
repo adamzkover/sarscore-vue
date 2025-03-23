@@ -14,7 +14,7 @@
             <span :class="['times-icon', `times-icon-${observation.getSScore()}`]">S</span>
           </p>
           <p class="times-section">
-            <span class="times-icon fa-solid fa-calendar-days"></span> {{ observation.registered }}
+            <span class="times-icon fa-solid fa-calendar-days"></span> {{ observation.registered.replace('T', ' ') }}
           </p>
           <p class="times-section">
             <span class="times-icon fa-solid fa-ruler"></span>
