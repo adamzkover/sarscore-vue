@@ -7,7 +7,7 @@
     <h2>Pasienter</h2>
     <ul>
       <li>
-        <router-link to="/patient/27115743487">Tore</router-link>
+        <router-link to="/patient/27113943487">Tore</router-link>
       </li>
     </ul>
   </main>

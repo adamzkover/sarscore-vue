@@ -15,11 +15,6 @@ import 'bootstrap'
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <RouterLink class="nav-link" to="/patient/27115743487">Tore</RouterLink>
-            </li>
-          </ul>
         </div>
       </div>
     </nav>
