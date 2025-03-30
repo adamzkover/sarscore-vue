@@ -36,7 +36,7 @@
           <h2><span class="times-icon">T</span></h2>
         </div>
         <div class="col-sm-10">
-          <p class="fw-bold">Farge:</p>
+          <p class="fw-bold">Sårbunnens farge:</p>
           <div class="form-check fs-5">
             <input class="form-check-input" v-model="color" type="checkbox" value="pink" id="colorPink" />
             <label class="form-check-label" for="colorPink"><span class="badge" style="background-color: #f2d3e1;">&nbsp;</span> Rosa</label>

@@ -13,12 +13,12 @@ const registered = ref(new Date().toISOString().substr(0, 10)); // Pre-set to cu
 const maxDate = new Date().toISOString().substr(0, 10); // Get current date for max attribute
 
 const locationOptions = {
-  'Hode og ansikt': ['Panne', 'Kinn', 'Nese', 'Lepper', 'Ører', 'Hodebunn'],
+  'Hode og ansikt': ['Panne', 'Kinn', 'Nese', 'Lepper', 'Øre - høyre', 'Øre - venstre', 'Hodebunn'],
   'Hals og nakke': ['Hals', 'Nakke'],
-  'Overekstremiteter': ['Skulder', 'Overarm', 'Albue', 'Underarm', 'Håndledd', 'Hånd', 'Fingre'],
+  'Overekstremiteter': ['Skulder - høyre', 'Skulder - venstre', 'Overarm - høyre', 'Overarm - venstre', 'Albue - høyre', 'Albue - venstre', 'Underarm - høyre', 'Underarm - venstre', 'Håndledd - høyre', 'Håndledd - venstre', 'Hånd - høyre', 'Hånd - venstre', 'Fingre - høyre hånd', 'Fingre - venstre hånd'],
   'Thorax (brystkasse og rygg)': ['Bryst', 'Ribben', 'Øvre rygg', 'Nedre rygg'],
   'Abdomen og bekken': ['Øvre del av magen', 'Nedre del av magen', 'Hofter', 'Lysken', 'Sete'],
-  'Underekstremiteter': ['Lår', 'Kne', 'Legg', 'Ankel', 'Fot', 'Tå'],
+  'Underekstremiteter': ['Lår - høyre', 'Lår - venstre', 'Kne - høyre', 'Kne - venstre', 'Legg - høyre', 'Legg - venstre', 'Ankel - høyre', 'Ankel - venstre', 'Fot - høyre', 'Fot - venstre', 'Tå - høyre fot', 'Tå - venstre fot'],
   'Generelt kroppsområde': ['Andre kroppsdeler']
 }; // Define location options with categories
 
