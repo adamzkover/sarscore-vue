@@ -16,17 +16,17 @@
           <p class="fw-bold">Størrelse:</p>
           <div class="input-group mb-3">
             <span class="input-group-text" style="width: 5rem;" id="inputGroup-length">Lengde</span>
-            <input type="number" inputmode="decimal" class="form-control" v-model="length" aria-label="Lengde" aria-describedby="inputGroup-length">
+            <input type="number" inputmode="decimal" class="form-control" v-model="length" aria-label="Lengde" aria-describedby="inputGroup-length" step="0.01">
             <span class="input-group-text">mm</span>
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text" style="width: 5rem;" id="inputGroup-width">Bredde</span>
-            <input type="number" inputmode="decimal" class="form-control" v-model="width" aria-label="Bredde" aria-describedby="inputGroup-width">
+            <input type="number" inputmode="decimal" class="form-control" v-model="width" aria-label="Bredde" aria-describedby="inputGroup-width" step="0.01">
             <span class="input-group-text">mm</span>
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text" style="width: 5rem;" id="inputGroup-depth">Dybde</span>
-            <input type="number" inputmode="decimal" class="form-control" v-model="depth" aria-label="Dybde" aria-describedby="inputGroup-depth">
+            <input type="number" inputmode="decimal" class="form-control" v-model="depth" aria-label="Dybde" aria-describedby="inputGroup-depth" step="0.01">
             <span class="input-group-text">mm</span>
           </div>
         </div>
