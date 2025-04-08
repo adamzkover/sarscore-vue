@@ -41,17 +41,20 @@ function registerWound() {
       <ul class="list-group mb-3">
         <li class="list-group-item list-group-item-action col">
           <div class="row">
-            <div class="col-4">
+            <div class="col-3">
               <strong>Type</strong>
             </div>
-            <div class="col-4">
+            <div class="col-3">
               <strong>Kroppsregion</strong>
             </div>
-            <div class="col-3">
+            <div class="col-2">
               <strong>Registrert</strong>
             </div>
-            <div class="col-1 text-end">
-              <!-- No title for the icon column -->
+            <div class="col-2">
+              <strong>Antall sårskift</strong>
+            </div>
+            <div class="col-2 text-end">
+              <strong>Gå til såret</strong>
             </div>
           </div>
         </li>
@@ -60,16 +63,19 @@ function registerWound() {
             :to="{ name: 'WoundView', params: { patientId: patient.id, woundId: wound.id } }"
             class="stretched-link text-decoration-none text-body">
             <div class="row">
-              <div class="col-4">
+              <div class="col-3">
                 {{ wound.type }}
               </div>
-              <div class="col-4">
+              <div class="col-3">
                 {{ wound.location }}
               </div>
-              <div class="col-3">
+              <div class="col-2">
                 {{ wound.registered }}
               </div>
-              <div class="col-1 d-flex align-items-center justify-content-end">
+              <div class="col-2">
+                {{ wound.observations.length }}
+              </div>
+              <div class="col-2 d-flex align-items-center justify-content-end">
                 <i class="fas fa-circle-play"></i>
               </div>
             </div>
