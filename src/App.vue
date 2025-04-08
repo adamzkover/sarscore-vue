@@ -7,7 +7,7 @@ import 'bootstrap'
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <RouterLink class="navbar-brand" to="/">
+        <RouterLink class="navbar-brand" to="/patient/27113943487">
           <img alt="Vue logo" src="@/assets/sarscore1.png" height="30" class="d-inline-block align-top me-2" />
           SårScore
         </RouterLink>
