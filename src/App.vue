@@ -11,11 +11,6 @@ import 'bootstrap'
           <img alt="Vue logo" src="@/assets/sarscore1.png" height="30" class="d-inline-block align-top me-2" />
           SårScore
         </RouterLink>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-        </div>
       </div>
     </nav>
   </header>
